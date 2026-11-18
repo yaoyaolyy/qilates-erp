@@ -15,223 +15,230 @@ body{font:14px/1.5 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif;colo
 .tab{padding:0 18px;display:flex;align-items:center;gap:8px;color:#c5cbe0;cursor:pointer;white-space:nowrap;border-radius:6px 6px 0 0}
 .tab.on{background:#fff;color:#1f2329;font-weight:600}
 .tab i{font-style:normal;opacity:.6}
-.tr{margin-left:auto;display:flex;align-items:center;gap:20px;padding:0 20px;height:56px;color:#dfe3f2}
+.tr{margin-left:auto;display:flex;align-items:center;gap:20px;padding:0 20px;height:56px;color:#dfe3f2;white-space:nowrap}
 .av{width:30px;height:30px;border-radius:50%;background:#7a8bd6;display:grid;place-items:center;font-size:12px}
 .main{flex:1;display:flex;min-height:0}
 .side{width:200px;background:#fff;border-right:1px solid #e6e8ee;overflow:auto;padding:10px;flex:none}
 .mi{padding:10px 12px;border-radius:8px;cursor:pointer;display:flex;align-items:center;gap:10px;font-size:15px;margin-bottom:4px}
-.mi:hover{background:#f3f5fb}
-.mi.on{background:#e8eefd;color:#2d5bff;font-weight:600}
+.mi:hover{background:#f3f5fb}.mi.on{background:#e8eefd;color:#2d5bff;font-weight:600}
 .mi .ar{margin-left:auto;font-size:11px;color:#8a90a0;transition:.2s}
 .grp.open>.mi .ar{transform:rotate(180deg)}
 .sub{display:none}.grp.open .sub{display:block}
-.sub .mi{padding-left:44px;font-size:14px;color:#4a5060}
-.sub .mi.on{color:#2d5bff}
-.content{flex:1;overflow:auto;padding:0 0 30px}
+.sub .mi{padding-left:44px;font-size:14px;color:#4a5060}.sub .mi.on{color:#2d5bff}
+.content{flex:1;overflow:auto;padding-bottom:40px}
 .upd{background:#fff;height:54px;display:flex;align-items:center;justify-content:flex-end;padding:0 28px;color:#6b7280;border-bottom:1px solid #eef0f4;margin-bottom:16px}
 .wrap{padding:0 16px}
 .row{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:16px}
-.card{background:#fff;border-radius:8px;padding:20px 24px;flex:1;min-width:200px;box-shadow:0 1px 2px rgba(0,0,0,.03)}
+.card{background:#fff;border-radius:8px;padding:20px 24px;flex:1;min-width:200px}
 .card h4{font-size:17px;margin-bottom:14px}
-.cg{display:flex;gap:40px}
-.cg small{color:#6b7280;font-size:14px;display:block}
-.cg strong{font-size:34px;color:#c3c7d0;font-weight:700;line-height:1.3}
-.cg strong.hot{color:#2d5bff}
+.cg{display:flex;gap:36px}.cg small{color:#6b7280;display:block}
+.cg strong{font-size:34px;color:#c3c7d0;line-height:1.3}.cg strong.hot{color:#2d5bff}
 .panel{background:#fff;border-radius:8px;padding:22px 24px;margin-bottom:16px}
-.ph{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;flex-wrap:wrap;gap:10px}
+.ph{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:10px}
 .ph h3{font-size:18px}
-.seg{display:flex}
-.seg button{padding:7px 22px;border:1px solid #d9dce3;background:#fff;cursor:pointer;font-size:14px;margin-left:-1px}
+.seg{display:flex}.seg button{padding:7px 22px;border:1px solid #d9dce3;background:#fff;cursor:pointer;margin-left:-1px}
 .seg button.on{border-color:#2d5bff;color:#2d5bff;position:relative;z-index:1}
 .stats{display:flex;gap:30px;margin-bottom:10px;flex-wrap:wrap}
 .st{width:250px;padding:18px 28px;border-radius:6px;border-top:4px solid;box-shadow:0 2px 10px rgba(0,0,0,.07)}
 .st small{color:#555;font-size:15px}.st div{font-size:30px;font-weight:700}
+.tw{overflow-x:auto}
 table{width:100%;border-collapse:collapse;font-size:14px}
 th,td{padding:10px 12px;border-bottom:1px solid #eef0f4;text-align:left;vertical-align:top}
-th{background:#f7f8fb;color:#4a5060;font-weight:600;white-space:nowrap}
-.tag{display:inline-block;padding:1px 8px;border-radius:10px;font-size:12px;background:#e8eefd;color:#2d5bff}
-.tag.g{background:#e6f6ec;color:#16a34a}.tag.o{background:#fff3e0;color:#d97706}.tag.r{background:#fdecec;color:#dc2626}
+th{background:#f7f8fb;color:#4a5060;white-space:nowrap}
+.empty{text-align:center;color:#9aa0ad;padding:24px}
+.tag{display:inline-block;padding:1px 8px;border-radius:10px;font-size:12px;background:#e8eefd;color:#2d5bff;white-space:nowrap}
+.tag.g{background:#e6f6ec;color:#16a34a}.tag.o{background:#fff3e0;color:#d97706}.tag.r{background:#fdecec;color:#dc2626}.tag.x{background:#eee;color:#777}
+.btn{padding:6px 14px;border:1px solid #d9dce3;background:#fff;border-radius:6px;cursor:pointer;font-size:14px}
+.btn:hover{border-color:#2d5bff;color:#2d5bff}
+.btn.p{background:#2d5bff;border-color:#2d5bff;color:#fff}.btn.p:hover{background:#1f49d6;color:#fff}
+.btn.d{background:#dc2626;border-color:#dc2626;color:#fff}.btn.d:hover{background:#b91c1c;color:#fff}
+.lk{color:#2d5bff;cursor:pointer;margin-right:12px;white-space:nowrap}.lk.d{color:#dc2626}
 .note{background:#f7f8fb;border-left:3px solid #2d5bff;padding:10px 14px;margin-top:14px;color:#4a5060;border-radius:4px}
-.flow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:6px 0 10px}
-.flow span{background:#f3f5fb;border:1px solid #dfe4f3;border-radius:6px;padding:6px 12px}
-.flow em{font-style:normal;color:#8a90a0}
+.flow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:6px 0}
+.flow span{background:#f3f5fb;border:1px solid #dfe4f3;border-radius:6px;padding:6px 12px}.flow em{font-style:normal;color:#8a90a0}
+#modal{position:fixed;inset:0;background:rgba(10,26,63,.45);display:none;align-items:center;justify-content:center;z-index:50;padding:16px}
+.mb{background:#fff;border-radius:10px;width:480px;max-width:100%;max-height:90vh;overflow:auto;padding:24px}
+.mb h3{font-size:18px;margin-bottom:16px}
+.fld{margin-bottom:12px}.fld label{display:block;color:#4a5060;margin-bottom:4px}
+.fld input,.fld select{width:100%;padding:8px 10px;border:1px solid #d9dce3;border-radius:6px;font:inherit}
+.fld input:focus,.fld select:focus{outline:0;border-color:#2d5bff}
+.err{color:#dc2626;min-height:20px;margin-bottom:6px}
+.ma{display:flex;justify-content:flex-end;gap:10px;margin-top:10px}
+.kv{background:#f7f8fb;border-radius:6px;padding:10px 14px;margin:8px 0}.kv div{padding:2px 0}.kv b{color:#6b7280;font-weight:400;margin-right:8px}
+#toast{position:fixed;top:70px;left:50%;transform:translateX(-50%);background:#1f2329;color:#fff;padding:8px 18px;border-radius:6px;display:none;z-index:60}
 .fab{position:fixed;left:50%;bottom:0;transform:translateX(-50%);background:#2d5bff;color:#fff;padding:8px 20px;border-radius:20px 20px 0 0;cursor:pointer;font-weight:600}
 @media(max-width:800px){.side{width:64px}.mi span,.mi .ar{display:none}.sub .mi{padding-left:12px}.logo{width:auto}.logo span{display:none}}
 </style>
 </head>
 <body>
-<div class="top">
-  <div class="logo"><b>X</b><span>自研 ERP</span></div>
-  <div class="tabs" id="tabs"></div>
-  <div class="tr"><span>🧮 试算</span><span>中文 ▾</span><div class="av">MY</div><span>ADMIN</span></div>
-</div>
-<div class="main">
-  <nav class="side" id="side"></nav>
-  <section class="content"><div class="upd" id="upd"></div><div class="wrap" id="view"></div></section>
-</div>
-<div class="fab" onclick="alert('服务：对接领星 API 前，请先确认 PPT P16 的 5 项待确认事项')">❓ 服务</div>
+<div class="top"><div class="logo"><b>X</b><span>自研 ERP</span></div><div class="tabs" id="tabs"></div>
+<div class="tr"><span class="lk" style="color:#dfe3f2;margin:0" onclick="go('history')">🕘 操作记录</span><span>中文 ▾</span><div class="av">MY</div><span>ADMIN</span></div></div>
+<div class="main"><nav class="side" id="side"></nav>
+<section class="content"><div class="upd" id="upd"></div><div class="wrap" id="view"></div></section></div>
+<div class="fab" onclick="toast('开工前请先确认「风险与待确认」5 项')">❓ 服务</div>
+<div id="modal"></div><div id="toast"></div>
 
 <script>
-const T = (h) => h; // 方便后续替换为 i18n
-const tbl = (cols, rows) => `<table><thead><tr>${cols.map(c=>`<th>${c}</th>`).join('')}</tr></thead><tbody>${rows.map(r=>`<tr>${r.map(c=>`<td>${c}</td>`).join('')}</tr>`).join('')}</tbody></table>`;
-const tag = (t,c='') => `<span class="tag ${c}">${t}</span>`;
-const flow = (a) => `<div class="flow">${a.map(x=>`<span>${x}</span>`).join('<em>→</em>')}</div>`;
-const note = (t) => `<div class="note">${t}</div>`;
-const panel = (h, b) => `<div class="panel"><div class="ph"><h3>${h}</h3></div>${b}</div>`;
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const flow=a=>`<div class="flow">${a.map(x=>`<span>${x}</span>`).join('<em>→</em>')}</div>`;
+const note=t=>`<div class="note">${t}</div>`;
+let uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,6);
 
-/* ===== 页面内容（来自 PPT P4–P16）===== */
-const pages = {
-  products: { t:'物料主数据', html: () =>
-    panel('A. 电子产品（成品 SKU）', tbl(['SKU 编码','品名 / 规格','采购价 (CNY)','建议售价 (USD)','毛重','BOM 辅料'],
-      [['QLT-MAT-001','指压垫 160×60','¥ 86.00','$ 49.00','2.4 kg','外箱 / 说明书 / 感谢卡']])) +
-    panel('B. 包装辅料（包材 / 赠品）', tbl(['辅料 SKU','品名 / 单位','单价 (CNY)','单件用量','用途标签','所在仓'],
-      [['Pkg-Box-01','彩色外箱 / 个','¥ 3.20','1 / 单',tag('销售包材'),'海外仓'],
-       ['Pkg-Card-01','感谢卡 / 张','¥ 0.30','1 / 单',tag('销售包材'),'海外仓'],
-       ['Gift-001','达人赠品 / 个','¥ 12.00','按单',tag('达人赠品','o'),'国内仓']]) +
-    note('SKU 全局唯一，国内仓 / 海外仓 / 领星 / 独立站共用；辅料通过 BOM 随成品出库自动扣减。')) },
-  inbound: { t:'入库管理', html: () =>
-    panel('线 1 · 成品采购', flow(['下采购单（工厂 CNY）','到货验收','国内仓库存 +','应付账款 +','工厂对账付款','回写实际成本'])) +
-    panel('线 2 · 辅料采购', flow(['包材 / 卡片 / 赠品到货','国内仓辅料库存 +','（可选）随头程发海外仓'])) +
-    panel('线 3 · 头程发海外仓', flow(['国内仓库存 −（在途）','ERP 推备货单到领星 API','货代承运','海外仓签收 → 海外仓库存 +','运费摊销回写成本']) +
-    note('国内扣减 ≠ 海外入库，中间为“在途”状态；头程运费按箱 / 重量摊销到 SKU，入仓时计入单位成本。')) },
-  outbound: { t:'出库管理', html: () =>
-    panel('出库类型', tbl(['出库类型','触发来源','库存动作','财务动作','推领星'],
-      [['销售出库','小程序 / 独立站 / 平台订单自动入 ERP','海外仓成品 −1，BOM 辅料同步 −','记收入 USD、COGS、尾程运费',tag('自动','g')],
-       ['达人赠送 / 样品','运营在 ERP 手工建单','海外仓成品 −1，BOM 辅料同步 −','无收入；计入“达人寄送费用”',tag('手工触发','o')],
-       ['补发 / 客诉','关联原订单，客服建单','海外仓成品 −1，走售后单','无新增收入；计入“售后成本”',tag('是','g')],
-       ['盘点损耗 / 自取','月度盘点差异','对应仓库账 −，主管审批','计入盘亏 / 营业外',tag('否','r')]])) +
-    panel('统一状态机', flow(['待发货','已推领星','仓库已接单','已出库（拿追踪号）','已签收 / 已完成']))},
-  report: { t:'月度进销存', html: () =>
-    panel('2026-11 · SKU × 仓库（示例占位数据）', tbl(['SKU / 仓库','期初','本月入库','本月出库','期末','销售额 (USD)','货品成本 (CNY)'],
-      [['QLT-MAT-001 / 美西仓',120,200,186,134,'$ 9,114','¥ 15,996'],
-       ['QLT-MAT-001 / 国内仓',500,300,350,450,'—','—'],
-       ['Pkg-Box-01 / 美西仓',500,'1,000',186,'1,314','—','¥ 595'],
-       ['达人寄送（合计）','—','—',42,'—','$ 0','¥ 3,612']]) +
-    note('口径：按月切；期初 = 上月期末；入库 = 采购 + 头程到仓；出库按销售 / 达人 / 补发 / 损耗分列。附加视图：在途、动销 30/90 天、低库存预警。')) },
-  decision: { t:'下单入口决策', html: () =>
-    panel('方案 A（领星下单） vs 方案 B（自研 ERP 下单，推荐）', tbl(['维度','方案 A：领星 ERP','方案 B：自研 ERP ' + tag('推荐','g')],
-      [['达人赠送 / 样品','走“0 元订单”，字段硬凑，无法单独汇总','原生“出库类型=达人赠送”，无收入自动记成本'],
-       ['小程序 / 独立站','需额外中间件，数据不在自己手里','直接收 webhook，一手掌握'],
-       ['辅料成本','BOM 支持弱，对不上订单','BOM 自动扣辅料并算包材成本'],
-       ['关闭原进销存','不能关闭，自研沦为报表','可关闭，领星降级为物流 + 仓储通道'],
-       ['代价','开发量小，业务被锁死','需做订单 / 库存 / 对接层，但灵活可控']])) },
-  lingxing: { t:'领星对接', html: () =>
-    panel('下行：ERP → 领星', tbl(['接口','用途','状态'],
-      [['POST /orders','销售单、达人单、补发单',tag('阶段 2 · 先跑达人单','o')],
-       ['POST /stock-up','头程备货单（指定海外仓 + 渠道）',tag('阶段 2','o')]])) +
-    panel('上行：领星 → ERP', tbl(['方式','内容','频率'],
-      [['Webhook','出库回传、追踪号、物流轨迹','实时'],
-       ['定时拉取','海外仓库存数量（只读，先对账 1 周）','每日 1 次'],
-       ['账单回写','尾程运费、仓储费','按月对账']]) +
-    note('实施：① 申请 API 凭证并授权海外仓 → ② 库存只读对账 → ③ 订单下行（灰度达人单→销售单）→ ④ 账单回写。通信为服务器到服务器，不暴露给前端。')) },
-  channels: { t:'渠道接入', html: () =>
-    panel('渠道层', tbl(['渠道','接入方式','要点'],
-      [['微信小程序','后端 → ERP：订单创建 / 支付成功 / 退款 webhook','库存查询调 ERP 接口，避免超卖'],
-       ['独立站（Shopify）','orders/create、orders/paid、orders/updated','USD 原币入账；发货状态、追踪号回写'],
-       ['亚马逊 / Temu','不直连，ERP 从领星回拉','映射表：领星订单号 ↔ 自研订单号']]) +
-    note('统一编号 SO-YYYYMMDD-XXXX，推领星时携带自研单号作为外部单号。')) },
-  cost: { t:'成本归集', html: () =>
-    panel('单订单成本 = 货 + 辅料 + 物流', tbl(['','① 货物成本 COGS','② 辅料成本','③ 物流成本'],
-      [['来源','采购入库单','BOM 自动展开','领星账单回写'],
-       ['币种','CNY','CNY','混合（USD 为主）'],
-       ['口径','移动加权平均','外箱 / 说明书 / 卡片 / 赠品','头程摊销 + 尾程 + 仓储'],
-       ['触发','销售出库结转','随销售出库扣减','尾程出库记，月末对账']]) +
-    note('不进本系统：营销推广费（Facebook / 达人佣金 / 广告费）。')) },
-  fx: { t:'双币种账单', html: () =>
-    panel('收入端（USD）', flow(['独立站 / 小程序 USD 标价','Stripe / PayPal 扣手续费','美元账户到账'])) +
-    panel('支出端（CNY + USD）', tbl(['支出项','原币','付款对象','触发节点','ERP 记录'],
-      [['工厂货款','CNY','工厂对公','采购入库','应付 → 付款核销'],
-       ['包材 / 辅料','CNY','包材商','辅料入库','应付 → 付款核销'],
-       ['头程物流','CNY/USD','货代 / 领星','头程发货','按箱摊销到 SKU'],
-       ['尾程 + 仓储','USD','海外仓 / 物流商','出库 + 月末账单','订单级尾程费 + 月度仓储费']]) +
-    note('每笔记原币 + 当月记账汇率；月末同时出“原币合计”与“折人民币合计”，不做实时汇兑损益。')) },
-  roadmap: { t:'开发路线', html: () =>
-    panel('4 阶段 · 约 7 周', tbl(['阶段','周期','内容','验收'],
-      [['1 地基','第 1–2 周','SKU 主数据、国内仓出入库、月度报表','手工录入入库，报表出数'],
-       ['2 领星打通','第 3–4 周','API 凭证、拉海外仓库存、达人单下行','库存对账一致，达人单可出库'],
-       ['3 渠道接入','第 5–6 周','小程序 / Shopify webhook，销售单全切','下单自动出单并推领星'],
-       ['4 成本关账','第 7 周','BOM 扣辅料、尾程费回写、双币种利润表','领星进销存下线']]) +
-    note('每阶段先 1 周手工双轨，对账无差异再切流量；领星账号保留 1 个月只读权限作回滚。')) },
-  todo: { t:'风险与待确认', html: () =>
-    panel('开工前须确认的 5 件事', tbl(['#','事项','重要性','对接人'],
-      [[1,'领星开放 API 权限清单',tag('能否推达人单、拉尾程账单','r'),'领星客户经理 + 技术'],
-       [2,'海外仓是否接受自研 ERP 经领星 API 直接下单',tag('已确认可以','g'),'海外仓 + 领星'],
-       [3,'头程 / 尾程账单粒度','决定成本取数方式','物流 / 海外仓财务'],
-       [4,'历史库存期初导入','以领星数还是盘点数','运营 + 仓库'],
-       [5,'记账汇率口径','月初中行中间价 or 实际结汇','财务负责人']])) },
-  settings: { t:'系统设置', html: () => panel('系统设置', '<p>用户、角色权限、汇率口径、领星 client_id / secret 配置（占位）。</p>') }
+/* ===== 数据集合定义：[key,标签,类型(t文本/n数字/s下拉/d日期),选项] ===== */
+const S=['待发货','已推领星','仓库已接单','已出库','已完成'];
+const C={
+ products:{t:'成品 SKU',cols:[['sku','SKU 编码'],['name','品名 / 规格'],['cny','采购价 CNY','n'],['usd','建议售价 USD','n'],['kg','毛重 kg','n'],['bom','BOM 辅料']],
+  rows:[['QLT-MAT-001','指压垫 160×60',86,49,2.4,'外箱 / 说明书 / 感谢卡']]},
+ materials:{t:'包装辅料',cols:[['sku','辅料 SKU'],['name','品名 / 单位'],['cny','单价 CNY','n'],['use','单件用量'],['tag','用途标签','s',['销售包材','达人赠品','退货备用']],['wh','所在仓','s',['国内仓','海外仓']]],
+  rows:[['Pkg-Box-01','彩色外箱 / 个',3.2,'1 / 单','销售包材','海外仓'],['Pkg-Card-01','感谢卡 / 张',0.3,'1 / 单','销售包材','海外仓'],['Gift-001','达人赠品 / 个',12,'按单','达人赠品','国内仓']]},
+ inbound:{t:'入库单',cols:[['no','入库单号'],['line','入库线','s',['成品采购','辅料采购','头程发海外仓']],['sku','SKU'],['qty','数量','n'],['date','日期','d'],['st','状态','s',['待收货','在途','已入库']]],
+  rows:[['IN-20261110-01','成品采购','QLT-MAT-001',300,'2026-11-10','已入库'],['IN-20261115-01','头程发海外仓','QLT-MAT-001',200,'2026-11-15','在途'],['IN-20261116-01','辅料采购','Pkg-Box-01',1000,'2026-11-16','待收货']]},
+ rules:{t:'出库类型规则',cols:[['type','出库类型'],['src','触发来源'],['inv','库存动作'],['fin','财务动作'],['push','推领星','s',['自动','手工触发','是','否']]],
+  rows:[['销售出库','小程序 / 独立站 / 平台订单','海外仓成品 −1，BOM 辅料 −','记收入 USD、COGS、尾程运费','自动'],['达人赠送 / 样品','运营在 ERP 手工建单','海外仓成品 −1，BOM 辅料 −','无收入；计入达人寄送费用','手工触发'],['补发 / 客诉','关联原订单，客服建单','海外仓成品 −1，走售后单','无新增收入；计入售后成本','是'],['盘点损耗 / 自取','月度盘点差异','对应仓库账 −，主管审批','计入盘亏 / 营业外','否']]},
+ outbound:{t:'出库单',cols:[['no','出库单号'],['type','类型','s',['销售','达人赠送','补发','盘点损耗']],['sku','SKU'],['qty','数量','n'],['to','收件人 / 备注'],['date','日期','d'],['st','状态','s',S]],
+  rows:[['SO-20261116-0001','销售','QLT-MAT-001',1,'US-CA 客户','2026-11-16','已完成'],['SO-20261117-0001','达人赠送','QLT-MAT-001',1,'达人 @amy','2026-11-17','已推领星'],['SO-20261118-0001','销售','QLT-MAT-001',2,'US-NY 客户','2026-11-18','待发货']]},
+ report:{t:'月度进销存（2026-11，占位示例）',cols:[['sku','SKU / 仓库'],['b','期初','n'],['i','本月入库','n'],['o','本月出库','n'],['e','期末','n'],['usd','销售额 USD'],['cny','货品成本 CNY']],
+  rows:[['QLT-MAT-001 / 美西仓',120,200,186,134,'$ 9,114','¥ 15,996'],['QLT-MAT-001 / 国内仓',500,300,350,450,'—','—'],['Pkg-Box-01 / 美西仓',500,1000,186,1314,'—','¥ 595'],['达人寄送（合计）',0,0,42,0,'$ 0','¥ 3,612']]},
+ decision:{t:'方案对比',cols:[['dim','维度'],['a','方案 A：领星下单'],['b','方案 B：自研 ERP 下单（推荐）']],
+  rows:[['达人赠送 / 样品','走“0 元订单”，字段硬凑，无法单独汇总','原生“出库类型=达人赠送”，自动记成本'],['小程序 / 独立站','需额外中间件，数据不在自己手里','直接收 webhook，一手掌握'],['辅料成本','BOM 支持弱，对不上订单','BOM 自动扣辅料并算包材成本'],['关闭原进销存','不能关闭，自研沦为报表','可关闭，领星降级为物流 + 仓储通道']]},
+ down:{t:'下行接口（ERP → 领星）',cols:[['api','接口'],['use','用途'],['st','状态','s',['未开始','灰度中','已上线']]],rows:[['POST /orders','销售单、达人单、补发单','灰度中'],['POST /stock-up','头程备货单（指定海外仓 + 渠道）','未开始']]},
+ up:{t:'上行同步（领星 → ERP）',cols:[['way','方式'],['c','内容'],['freq','频率'],['st','状态','s',['未开始','对账中','已上线']]],rows:[['Webhook','出库回传、追踪号、物流轨迹','实时','未开始'],['定时拉取','海外仓库存（只读，先对账 1 周）','每日 1 次','对账中'],['账单回写','尾程运费、仓储费','按月对账','未开始']]},
+ channels:{t:'渠道接入',cols:[['ch','渠道'],['how','接入方式'],['pt','要点'],['st','状态','s',['未开始','开发中','已上线']]],
+  rows:[['微信小程序','订单创建 / 支付成功 / 退款 webhook','库存查询调 ERP 接口，避免超卖','未开始'],['独立站（Shopify）','orders/create、paid、updated','USD 原币入账；回写追踪号','未开始'],['亚马逊 / Temu','不直连，ERP 从领星回拉','映射表：领星单号 ↔ 自研单号','未开始']]},
+ cost:{t:'成本三段模型',cols:[['seg','成本段'],['src','来源'],['cur','币种'],['rule','口径'],['trg','触发']],
+  rows:[['① 货物成本 COGS','采购入库单','CNY','移动加权平均','销售出库结转'],['② 辅料成本','BOM 自动展开','CNY','外箱 / 说明书 / 卡片 / 赠品','随销售出库扣减'],['③ 物流成本','领星账单回写','USD 为主','头程摊销 + 尾程 + 仓储','尾程出库记，月末对账']]},
+ fx:{t:'支出台账',cols:[['item','支出项'],['cur','原币','s',['CNY','USD','CNY/USD']],['amt','金额','n'],['rate','记账汇率','n'],['to','付款对象'],['trg','触发节点'],['rec','ERP 记录']],
+  rows:[['工厂货款','CNY',25800,'','工厂对公','采购入库','应付 → 付款核销'],['包材 / 辅料','CNY',3200,'','包材商','辅料入库','应付 → 付款核销'],['头程物流','CNY/USD',1800,7.1,'货代 / 领星','头程发货','按箱摊销到 SKU'],['尾程 + 仓储','USD',420,7.1,'海外仓 / 物流商','出库 + 月末账单','订单级尾程费 + 月度仓储费']]},
+ roadmap:{t:'开发阶段',cols:[['ph','阶段'],['wk','周期'],['ct','内容'],['ac','验收'],['st','状态','s',['未开始','进行中','已完成']]],
+  rows:[['1 地基','第 1–2 周','SKU 主数据、国内仓出入库、月度报表','手工录入入库，报表出数','进行中'],['2 领星打通','第 3–4 周','API 凭证、拉海外仓库存、达人单下行','库存对账一致，达人单可出库','未开始'],['3 渠道接入','第 5–6 周','小程序 / Shopify webhook，销售单全切','下单自动出单并推领星','未开始'],['4 成本关账','第 7 周','BOM 扣辅料、尾程费回写、双币种利润表','领星进销存下线','未开始']]},
+ todo:{t:'待确认事项',cols:[['ev','事项'],['why','重要性'],['who','对接人'],['st','状态','s',['待确认','已确认']]],
+  rows:[['领星开放 API 权限清单','能否推达人单、拉尾程账单','领星客户经理 + 技术','待确认'],['海外仓是否接受自研 ERP 经领星 API 下单','决定下单入口','海外仓 + 领星','已确认'],['头程 / 尾程账单粒度','决定成本取数方式','物流 / 海外仓财务','待确认'],['历史库存期初导入','以领星数还是盘点数','运营 + 仓库','待确认'],['记账汇率口径','月初中行中间价 or 实际结汇','财务负责人','待确认']]},
+ settings:{t:'系统参数',cols:[['k','参数'],['v','值'],['d','说明']],rows:[['记账汇率 USD→CNY','7.10','月初中行中间价（待财务确认）'],['领星 client_id','（待填写）','申请后填入，勿暴露给前端'],['低库存阈值','50','按 SKU 安全库存']]}
 };
-
-/* ===== 左侧菜单 ===== */
-const menu = [
-  {id:'home',t:'首页',i:'🏠'},
-  {t:'订单中心',i:'📋',c:[['outbound','出库管理（销售 / 达人 / 补发）']]},
-  {t:'库存中心',i:'📦',c:[['products','物料主数据'],['inbound','入库管理'],['report','月度进销存']]},
-  {t:'系统对接',i:'🔗',c:[['decision','下单入口决策'],['lingxing','领星对接'],['channels','渠道接入']]},
-  {t:'成本中心',i:'💰',c:[['cost','成本归集'],['fx','双币种账单']]},
-  {t:'项目管理',i:'🛣️',c:[['roadmap','开发路线'],['todo','风险与待确认']]},
-  {id:'settings',t:'系统设置',i:'⚙️'}
-];
-const titleOf = id => id==='home' ? '首页' : pages[id].t;
-let open = ['home'], cur = 'home';
-
-function renderSide(){
-  document.getElementById('side').innerHTML = menu.map(m => m.c
-    ? `<div class="grp ${m.c.some(x=>x[0]===cur)?'open':''}"><div class="mi" onclick="this.parentNode.classList.toggle('open')">${m.i}<span>${m.t}</span><b class="ar">▼</b></div>
-       <div class="sub">${m.c.map(x=>`<div class="mi ${x[0]===cur?'on':''}" onclick="go('${x[0]}')"><span>${x[1]}</span></div>`).join('')}</div></div>`
-    : `<div class="mi ${m.id===cur?'on':''}" onclick="go('${m.id}')">${m.i}<span>${m.t}</span></div>`).join('');
-}
-function renderTabs(){
-  document.getElementById('tabs').innerHTML = open.map(id =>
-    `<div class="tab ${id===cur?'on':''}" onclick="go('${id}')">${titleOf(id)}${id!=='home'?`<i onclick="event.stopPropagation();closeTab('${id}')">✕</i>`:''}</div>`).join('');
-}
-function go(id){ if(!open.includes(id)) open.push(id); cur=id; render(); }
-function closeTab(id){ open=open.filter(x=>x!==id); if(cur===id) cur=open[open.length-1]; render(); }
-
-/* ===== 首页 ===== */
-const cards = [
-  ['待处理',[['待审核订单',0]]],
-  ['入库',[['采购待收货',0],['头程在途',0]]],
-  ['出库',[['销售出库',0],['达人赠送',0],['补发 / 客诉',0]]],
-  ['领星同步',[['库存拉取异常',0],['下行失败',0]]],
-  ['低库存预警',[['SKU 数',0]]]
-];
-const ranges = {
-  week:{l:['11-16','11-17','11-18','11-19','11-20','11-21','11-22'],a:[0,0,0,0,0,0,0],b:[1,0,0,0,0,0,0],c:[0,0,0,0,0,0,0]},
-  month:{l:Array.from({length:30},(_,i)=>i+1),a:Array(30).fill(0),b:Array.from({length:30},(_,i)=>i<18?(i%5===0?1:0):0),c:Array(30).fill(0)},
-  year:{l:['1','2','3','4','5','6','7','8','9','10','11','12'],a:[0,0,0,0,0,0,0,2,3,2,1,0],b:[0,0,0,0,0,0,0,5,12,18,9,1],c:[0,0,0,0,0,0,0,0,1,2,0,0]}
+/* 页面：包含的集合 + 静态说明 */
+const P={
+ products:{t:'物料主数据',c:['products','materials'],h:note('SKU 全局唯一；辅料通过 BOM 随成品出库自动扣减。')},
+ inbound:{t:'入库管理',c:['inbound'],h:`<div class="panel"><h3 style="margin-bottom:10px">三条入库线</h3>${flow(['采购单（CNY）','到货验收','国内仓 +','应付 +','对账付款'])}${flow(['国内仓 −（在途）','推备货单到领星','海外仓签收 → 海外仓 +','运费摊销回成本'])}${note('国内扣减 ≠ 海外入库，中间为“在途”；头程运费入仓时摊销到单位成本。')}</div>`},
+ outbound:{t:'出库管理',c:['outbound','rules'],h:`<div class="panel"><h3 style="margin-bottom:10px">统一状态机</h3>${flow(S)}</div>`},
+ report:{t:'月度进销存',c:['report'],h:note('口径：按月切；期初 = 上月期末；入库 = 采购 + 头程到仓；出库按类型分列。')},
+ decision:{t:'下单入口决策',c:['decision'],h:note('结论：下单入口收在自研 ERP，领星只做履约执行。')},
+ lingxing:{t:'领星对接',c:['down','up'],h:note('实施：申请 API 凭证 → 库存只读对账 → 订单下行（先达人单）→ 账单回写。服务器到服务器通信。')},
+ channels:{t:'渠道接入',c:['channels'],h:note('统一编号 SO-YYYYMMDD-XXXX，推领星时携带自研单号。')},
+ cost:{t:'成本归集',c:['cost'],h:note('营销推广费（Facebook / 达人佣金 / 广告）不进本系统。')},
+ fx:{t:'双币种账单',c:['fx'],h:`<div class="panel"><h3 style="margin-bottom:10px">收入端（USD）</h3>${flow(['独立站 / 小程序 USD 标价','Stripe / PayPal 扣手续费','美元账户到账'])}${note('每笔记原币 + 当月汇率；月末出原币合计与折人民币合计，不做实时汇兑损益。')}</div>`},
+ roadmap:{t:'开发路线',c:['roadmap'],h:note('每阶段先 1 周手工双轨，对账无差异再切；领星账号保留 1 个月只读作回滚。')},
+ todo:{t:'风险与待确认',c:['todo'],h:''},
+ settings:{t:'系统设置',c:['settings'],h:''},
+ history:{t:'操作记录',c:[],h:''}
 };
-let rg = 'week';
-function chart(){
-  const d = ranges[rg], W=1000,H=260,L=40,B=30,max=Math.max(1,...d.a,...d.b,...d.c);
-  const x=i=>L+(W-L-10)*i/(d.l.length-1), y=v=>H-B-(H-B-10)*v/max;
-  const line=(s,col)=>`<polyline fill="none" stroke="${col}" stroke-width="2" points="${s.map((v,i)=>x(i)+','+y(v)).join(' ')}"/>`;
-  let g=''; for(let k=0;k<=5;k++){const v=max*k/5,yy=y(v);g+=`<line x1="${L}" x2="${W}" y1="${yy}" y2="${yy}" stroke="#e5e7eb" stroke-dasharray="4"/><text x="${L-8}" y="${yy+4}" text-anchor="end" font-size="12" fill="#6b7280">${+v.toFixed(1)}</text>`;}
-  const step=Math.ceil(d.l.length/10);
-  g+=d.l.map((t,i)=>i%step?'':`<text x="${x(i)}" y="${H-8}" text-anchor="middle" font-size="12" fill="#6b7280">${t}</text>`).join('');
-  return `<svg viewBox="0 0 ${W} ${H}" style="width:100%;height:auto">${g}${line(d.a,'#2d5bff')}${line(d.b,'#9333ea')}${line(d.c,'#16a34a')}</svg>`;
+const menu=[{id:'home',t:'首页',i:'🏠'},{t:'订单中心',i:'📋',c:['outbound']},{t:'库存中心',i:'📦',c:['products','inbound','report']},{t:'系统对接',i:'🔗',c:['decision','lingxing','channels']},{t:'成本中心',i:'💰',c:['cost','fx']},{t:'项目管理',i:'🛣️',c:['roadmap','todo']},{id:'history',t:'操作记录',i:'🕘'},{id:'settings',t:'系统设置',i:'⚙️'}];
+
+/* ===== 状态 / 持久化 ===== */
+const KEY='erp_state_v2';
+let D={},LOG=[];
+function seed(){D={};LOG=[];for(const k in C)D[k]=C[k].rows.map(r=>Object.assign({id:uid()},Object.fromEntries(C[k].cols.map((c,i)=>[c[0],r[i]]))));}
+try{const s=JSON.parse(localStorage.getItem(KEY));if(s&&s.D){D=s.D;LOG=s.LOG||[]}else seed()}catch(e){seed()}
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify({D,LOG}))}catch(e){}};
+const fmt=t=>new Date(t).toLocaleString('zh-CN',{hour12:false});
+function toast(m){const e=document.getElementById('toast');e.textContent=m;e.style.display='block';clearTimeout(e._t);e._t=setTimeout(()=>e.style.display='none',2200)}
+
+/* ===== 弹窗（Promise）===== */
+function modal(title,body,o={}){return new Promise(res=>{
+  const m=document.getElementById('modal');
+  m.innerHTML=`<div class="mb"><h3>${title}</h3>${body}<div class="err" id="err"></div><div class="ma"><button class="btn" id="mc">取消</button><button class="btn ${o.danger?'d':'p'}" id="mo">${o.ok||'确认'}</button></div></div>`;
+  m.style.display='flex';
+  const close=v=>{m.style.display='none';m.innerHTML='';res(v)};
+  document.getElementById('mc').onclick=()=>close(false);
+  m.onmousedown=e=>{if(e.target===m)close(false)};
+  document.getElementById('mo').onclick=()=>{const er=o.validate&&o.validate();if(er){document.getElementById('err').textContent=er;return}close(true)};
+  const f=m.querySelector('input,select');f&&f.focus();
+});}
+const kv=(cid,r)=>`<div class="kv">${C[cid].cols.map(c=>`<div><b>${c[1]}</b>${esc(r[c[0]])||'—'}</div>`).join('')}</div>`;
+
+/* ===== 增删改 + 记录 ===== */
+function commit(cid,op,id,after){
+  const arr=D[cid];let idx=arr.findIndex(r=>r.id===id),before=idx>=0?{...arr[idx]}:null;
+  if(op==='add'){arr.push(after);idx=arr.length-1}
+  else if(op==='edit')arr[idx]=after;
+  else arr.splice(idx,1);
+  LOG.unshift({id:uid(),t:Date.now(),cid,op,idx,before,after:op==='delete'?null:{...after},undone:false});
+  save();render();
 }
-function setRange(r){ rg=r; renderHome(); }
-function renderHome(){
-  const d=ranges[rg], sum=a=>a.reduce((p,c)=>p+c,0);
-  document.getElementById('view').innerHTML =
-    `<div class="row">${cards.map(c=>`<div class="card"><h4>${c[0]}</h4><div class="cg">${c[1].map(s=>`<div><small>${s[0]}</small><strong>${s[1]}</strong></div>`).join('')}</div></div>`).join('')}</div>
-     <div class="panel"><div class="ph"><h3>单量分析</h3>
-       <div class="seg">${[['week','本周'],['month','本月'],['year','本年']].map(r=>`<button class="${rg===r[0]?'on':''}" onclick="setRange('${r[0]}')">${r[1]}</button>`).join('')}</div></div>
-       <div class="stats">
-         <div class="st" style="border-color:#2d5bff"><small>入库单量</small><div>${sum(d.a)}</div></div>
-         <div class="st" style="border-color:#9333ea"><small>销售出库单量</small><div>${sum(d.b)}</div></div>
-         <div class="st" style="border-color:#16a34a"><small>达人赠送单量</small><div>${sum(d.c)}</div></div>
-       </div>${chart()}</div>
-     <div class="panel"><div class="ph"><h3>核心定位</h3></div>
-       ${note('自研 ERP = 业务中台 + 成本台账（订单 / 库存 / 成本三套账的单一事实源）；领星 = 物流商 + 海外仓 WMS 执行层，通过双向 API 对接。营销推广费不进本系统。')}
-       ${flow(['渠道：小程序 / 独立站 / 平台 / 达人单','自研 ERP：订单·库存·成本·报表','领星 ERP：海外仓 WMS + 物流'])}</div>`;
+async function openForm(cid,id){
+  const cfg=C[cid],old=id?D[cid].find(r=>r.id===id):null;let vals={};
+  const html=cfg.cols.map(c=>{const v=old?old[c[0]]:(c[2]==='d'?'2026-11-18':'');const t=c[2];
+    return `<div class="fld"><label>${c[1]}</label>`+(t==='s'?`<select data-k="${c[0]}">${c[3].map(o=>`<option ${o===v?'selected':''}>${o}</option>`).join('')}</select>`:`<input data-k="${c[0]}" type="${t==='n'?'number':t==='d'?'date':'text'}" step="any" value="${esc(v)}">`)+'</div>'}).join('');
+  const ok=await modal((old?'编辑':'新增')+' · '+cfg.t,html,{ok:'下一步',validate(){
+    vals={};document.querySelectorAll('#modal [data-k]').forEach(e=>vals[e.dataset.k]=e.type==='number'&&e.value!==''?+e.value:e.value);
+    return vals[cfg.cols[0][0]]===''?cfg.cols[0][1]+'不能为空':null}});
+  if(!ok)return;
+  const rec=Object.assign({id:old?old.id:uid()},vals);
+  const yes=await modal(old?'确认保存修改？':'确认新增？',kv(cid,rec)+'<p style="color:#6b7280">确认后将写入数据并记录到「操作记录」，可随时撤回。</p>',{ok:old?'确认修改':'确认添加'});
+  if(yes){commit(cid,old?'edit':'add',rec.id,rec);toast(old?'已修改':'已添加')}else toast('已取消')
 }
+async function delRow(cid,id){
+  const r=D[cid].find(x=>x.id===id);
+  const yes=await modal('确认删除？',kv(cid,r)+'<p style="color:#dc2626">删除后可在「操作记录」中撤回。</p>',{ok:'确认删除',danger:true});
+  if(yes){commit(cid,'delete',id);toast('已删除')}else toast('已取消')
+}
+async function undo(lid){
+  const e=LOG.find(x=>x.id===lid),arr=D[e.cid],cur=e.after?arr.findIndex(r=>r.id===e.after.id):-1;
+  const name={add:'新增',edit:'修改',delete:'删除'}[e.op];
+  const yes=await modal('确认撤回此操作？',`<p>将撤回：<b>${name}</b> · ${C[e.cid].t}</p>`+kv(e.cid,e.before||e.after),{ok:'确认撤回'});
+  if(!yes)return;
+  if(e.op==='add'){if(cur<0)return toast('记录已不存在，无法撤回');arr.splice(cur,1)}
+  else if(e.op==='edit'){if(cur<0)return toast('记录已不存在，无法撤回');arr[cur]={...e.before}}
+  else{if(arr.some(r=>r.id===e.before.id))return toast('记录已存在');arr.splice(Math.min(e.idx,arr.length),0,{...e.before})}
+  e.undone=true;e.ut=Date.now();save();render();toast('已撤回')
+}
+async function resetAll(){if(await modal('重置全部数据？','<p>将清空所有修改与操作记录，恢复初始示例数据。此操作不可撤回。</p>',{ok:'确认重置',danger:true})){seed();save();render();toast('已重置')}}
+
+/* ===== 渲染 ===== */
+const tagc=v=>/已完成|已入库|已上线|已确认|自动|^是$/.test(v)?'g':/待|手工|在途|进行|灰度|对账|开发/.test(v)?'o':/^否$/.test(v)?'r':/未开始/.test(v)?'x':'';
+const cell=(c,v)=>c[2]==='s'?`<span class="tag ${tagc(v)}">${esc(v)}</span>`:esc(v);
+function table(cid){const cfg=C[cid],rows=D[cid];
+  return `<div class="panel"><div class="ph"><h3>${cfg.t}</h3><button class="btn p" onclick="openForm('${cid}')">＋ 新增</button></div><div class="tw"><table><thead><tr>${cfg.cols.map(c=>`<th>${c[1]}</th>`).join('')}<th>操作</th></tr></thead><tbody>`+
+   (rows.length?rows.map(r=>`<tr>${cfg.cols.map(c=>`<td>${cell(c,r[c[0]])}</td>`).join('')}<td><span class="lk" onclick="openForm('${cid}','${r.id}')">编辑</span><span class="lk d" onclick="delRow('${cid}','${r.id}')">删除</span></td></tr>`).join(''):`<tr><td class="empty" colspan="${cfg.cols.length+1}">暂无数据，点击右上角新增</td></tr>`)+'</tbody></table></div></div>'}
+function history(){
+  return `<div class="panel"><div class="ph"><h3>操作记录（共 ${LOG.length} 条）</h3><button class="btn" onclick="resetAll()">重置全部数据</button></div><div class="tw"><table><thead><tr><th>时间</th><th>模块</th><th>操作</th><th>内容</th><th>状态</th><th>操作</th></tr></thead><tbody>`+
+  (LOG.length?LOG.map(e=>{const r=e.after||e.before,c0=C[e.cid].cols[0][0],op={add:'新增',edit:'修改',delete:'删除'}[e.op];
+   return `<tr><td>${fmt(e.t)}</td><td>${C[e.cid].t}</td><td><span class="tag ${e.op==='delete'?'r':e.op==='add'?'g':'o'}">${op}</span></td><td>${esc(r[c0])}</td><td>${e.undone?`<span class="tag x">已撤回 ${fmt(e.ut)}</span>`:'—'}</td><td>${e.undone?'':`<span class="lk" onclick="undo('${e.id}')">撤回</span>`}</td></tr>`}).join(''):'<tr><td class="empty" colspan="6">暂无操作记录</td></tr>')+'</tbody></table></div></div>'}
+
+/* 首页（数据来自入库单 / 出库单）*/
+let rg='week';
+const cnt=(cid,f)=>D[cid].filter(f).length;
+function series(){const dates=r=>r.date||'';let L=[],key;
+  if(rg==='week'){L=[16,17,18,19,20,21,22].map(d=>'2026-11-'+d);key=d=>d}
+  else if(rg==='month'){L=Array.from({length:30},(_,i)=>'2026-11-'+String(i+1).padStart(2,'0'));key=d=>d}
+  else{L=Array.from({length:12},(_,i)=>'2026-'+String(i+1).padStart(2,'0'));key=d=>d.slice(0,7)}
+  const f=(cid,p)=>L.map(l=>D[cid].filter(r=>p(r)&&key(dates(r))===l).length);
+  return {l:L.map(x=>x.slice(rg==='year'?5:5)),a:f('inbound',()=>1),b:f('outbound',r=>r.type==='销售'),c:f('outbound',r=>r.type==='达人赠送')}}
+function chart(d){const W=1000,H=260,Lm=40,B=30,max=Math.max(1,...d.a,...d.b,...d.c);
+  const x=i=>Lm+(W-Lm-10)*i/(d.l.length-1),y=v=>H-B-(H-B-10)*v/max;
+  const ln=(s,c)=>`<polyline fill="none" stroke="${c}" stroke-width="2" points="${s.map((v,i)=>x(i)+','+y(v)).join(' ')}"/>`;
+  let g='';for(let k=0;k<=4;k++){const v=max*k/4,yy=y(v);g+=`<line x1="${Lm}" x2="${W}" y1="${yy}" y2="${yy}" stroke="#e5e7eb" stroke-dasharray="4"/><text x="${Lm-8}" y="${yy+4}" text-anchor="end" font-size="12" fill="#6b7280">${+v.toFixed(1)}</text>`}
+  const st=Math.ceil(d.l.length/10);g+=d.l.map((t,i)=>i%st?'':`<text x="${x(i)}" y="${H-8}" text-anchor="middle" font-size="12" fill="#6b7280">${t}</text>`).join('');
+  return `<svg viewBox="0 0 ${W} ${H}" style="width:100%;height:auto">${g}${ln(d.a,'#2d5bff')}${ln(d.b,'#9333ea')}${ln(d.c,'#16a34a')}</svg>`}
+function setRange(r){rg=r;render()}
+function home(){
+  const sum=a=>a.reduce((p,c)=>p+c,0),d=series(),n=(t)=>cnt('outbound',r=>r.type===t&&r.st!=='已完成');
+  const cards=[['待处理',[['待发货出库',cnt('outbound',r=>r.st==='待发货')]]],['入库',[['待收货',cnt('inbound',r=>r.st==='待收货')],['头程在途',cnt('inbound',r=>r.st==='在途')]]],['出库（未完成）',[['销售',n('销售')],['达人赠送',n('达人赠送')],['补发',n('补发')]]],['操作记录',[['累计',LOG.length],['可撤回',LOG.filter(e=>!e.undone).length]]]];
+  return `<div class="row">${cards.map(c=>`<div class="card"><h4>${c[0]}</h4><div class="cg">${c[1].map(s=>`<div><small>${s[0]}</small><strong class="${s[1]?'hot':''}">${s[1]}</strong></div>`).join('')}</div></div>`).join('')}</div>
+  <div class="panel"><div class="ph"><h3>单量分析</h3><div class="seg">${[['week','本周'],['month','本月'],['year','本年']].map(r=>`<button class="${rg===r[0]?'on':''}" onclick="setRange('${r[0]}')">${r[1]}</button>`).join('')}</div></div>
+  <div class="stats"><div class="st" style="border-color:#2d5bff"><small>入库单量</small><div>${sum(d.a)}</div></div><div class="st" style="border-color:#9333ea"><small>销售出库单量</small><div>${sum(d.b)}</div></div><div class="st" style="border-color:#16a34a"><small>达人赠送单量</small><div>${sum(d.c)}</div></div></div>${chart(d)}</div>
+  <div class="panel"><h3 style="margin-bottom:8px">核心定位</h3>${note('自研 ERP = 业务中台 + 成本台账（订单 / 库存 / 成本的单一事实源）；领星 = 物流商 + 海外仓 WMS 执行层，双向 API 对接。')}</div>`}
+
+/* ===== 导航 ===== */
+let open=['home'],cur='home';
+const title=id=>id==='home'?'首页':P[id].t;
 function render(){
-  renderSide(); renderTabs();
-  document.getElementById('upd').textContent = '更新至时间 ' + new Date().toLocaleString('zh-CN',{hour12:false}) + ' UTC+8';
-  cur==='home' ? renderHome() : document.getElementById('view').innerHTML = pages[cur].html();
+  document.getElementById('side').innerHTML=menu.map(m=>m.c?`<div class="grp ${m.c.includes(cur)?'open':''}"><div class="mi" onclick="this.parentNode.classList.toggle('open')">${m.i}<span>${m.t}</span><b class="ar">▼</b></div><div class="sub">${m.c.map(x=>`<div class="mi ${x===cur?'on':''}" onclick="go('${x}')"><span>${P[x].t}</span></div>`).join('')}</div></div>`:`<div class="mi ${m.id===cur?'on':''}" onclick="go('${m.id}')">${m.i}<span>${m.t}</span></div>`).join('');
+  document.getElementById('tabs').innerHTML=open.map(id=>`<div class="tab ${id===cur?'on':''}" onclick="go('${id}')">${title(id)}${id!=='home'?`<i onclick="event.stopPropagation();closeTab('${id}')">✕</i>`:''}</div>`).join('');
+  document.getElementById('upd').textContent='更新至时间 '+fmt(Date.now())+' UTC+8';
+  document.getElementById('view').innerHTML=cur==='home'?home():cur==='history'?history():P[cur].c.map(table).join('')+P[cur].h;
 }
+function go(id){if(!open.includes(id))open.push(id);cur=id;render()}
+function closeTab(id){open=open.filter(x=>x!==id);if(cur===id)cur=open[open.length-1];render()}
 render();
 </script>
 </body>
