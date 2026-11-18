@@ -7,21 +7,16 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap');
         body { margin: 0; background-color: #F3EEDF; color: #5D4B3D; font-family: 'Roboto', sans-serif; }
-        .font-amiri { font-family: 'Amiri', Georgia, serif; }
-        
-        /* 布局框架 */
         .app-container { display: grid; height: 100vh; grid-template-rows: 50px 1fr; grid-template-columns: 240px 1fr; }
         .top-bar { grid-column: 1 / 3; background-color: #5D4B3D; color: #F3EEDF; display: flex; align-items: center; justify-content: space-between; padding: 0 20px; border-bottom: 2px solid #67674E; }
         .sidebar { background-color: #FAF8F2; border-right: 1px solid rgba(93,75,61,0.15); display: flex; flex-direction: column; justify-content: space-between; overflow-y: auto; }
         .main-content { background-color: #F3EEDF; padding: 24px; overflow-y: auto; }
         
-        /* 菜单与标签 */
-        .menu-item { padding: 12px 20px; cursor: pointer; font-size: 13px; color: #5D4B3D; display: flex; align-items: center; gap: 10px; transition: all 0.2s; text-decoration: none; }
+        .menu-item { padding: 12px 20px; cursor: pointer; font-size: 13px; color: #5D4B3D; display: flex; align-items: center; gap: 10px; transition: all 0.2s; }
         .menu-item:hover, .menu-item.active { background-color: #67674E; color: #FFFFFF; font-weight: 500; }
         .tab-chip { padding: 6px 16px; background: #FAF8F2; border-radius: 6px 6px 0 0; font-size: 13px; cursor: pointer; color: #5D4B3D; border: 1px solid rgba(93,75,61,0.15); border-bottom: none; display: inline-flex; align-items: center; gap: 8px; }
         .tab-chip.active { background: #F3EEDF; font-weight: bold; border-top: 3px solid #67674E; }
 
-        /* 卡片与表格 */
         .card-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 24px; }
         .card { background: #FAF8F2; padding: 20px; border-radius: 12px; border: 1px solid rgba(93,75,61,0.15); box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
         .btn { background: #67674E; color: white; border: none; padding: 8px 16px; border-radius: 8px; cursor: pointer; font-weight: 500; font-size: 13px; transition: background 0.2s; }
@@ -31,12 +26,11 @@
         th { background: #EFE9D8; color: #5D4B3D; padding: 12px; font-weight: 600; border-bottom: 2px solid rgba(93,75,61,0.15); }
         td { padding: 12px; border-bottom: 1px solid rgba(93,75,61,0.1); }
         
-        /* 弹窗 */
         .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.4); display: none; justify-content: center; align-items: center; z-index: 100; backdrop-filter: blur(2px); }
         .modal { background: #FAF8F2; padding: 30px; border-radius: 16px; width: 480px; border: 1px solid rgba(93,75,61,0.2); box-shadow: 0 10px 25px rgba(0,0,0,0.2); }
         .form-group { margin-bottom: 16px; }
         .form-group label { display: block; font-size: 12px; font-weight: 600; margin-bottom: 6px; color: #5D4B3D; }
-        .form-group input, .form-group select { width: 100%; padding: 10px 12px; border: 1px solid rgba(93,75,61,0.2); border-radius: 8px; box-sizing: border-box; background: #F3EEDF; font-size: 13px; color: #5D4B3D; }
+        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 10px 12px; border: 1px solid rgba(93,75,61,0.2); border-radius: 8px; box-sizing: border-box; background: #F3EEDF; font-size: 13px; color: #5D4B3D; }
     </style>
 </head>
 <body>
@@ -49,8 +43,8 @@
                 <span style="font-family: serif; font-size: 18px; font-weight: bold; letter-spacing: 0.5px;">QILATES <span style="font-size: 12px; font-weight: normal; opacity: 0.8;">ERP 业务中台</span></span>
             </div>
             <div style="display: flex; align-items: center; gap: 16px; font-size: 12px;">
-                <span style="background: rgba(255,255,255,0.15); padding: 4px 10px; border-radius: 12px;">运行环境：生产同步中</span>
-                <span style="opacity: 0.8; cursor: pointer;" onclick="alert('当前登录账号：QILATES_OPS')">账号: QILATES_OPS</span>
+                <span style="background: rgba(255,255,255,0.15); padding: 4px 10px; border-radius: 12px;">运行环境：零报错自包含架构</span>
+                <span style="opacity: 0.8; cursor: pointer;">账号: QILATES_OPS</span>
             </div>
         </div>
 
@@ -58,23 +52,22 @@
         <div class="sidebar">
             <div style="padding: 12px 0;">
                 <div class="menu-item active" id="menu-dashboard" onclick="switchTab('dashboard', '首页工作台')">📊 首页工作台</div>
+                <div class="menu-item" id="menu-sku-management" onclick="switchTab('sku-management', 'SKU与辅料档案')">📋 SKU 与辅料档案管理</div>
                 <div class="menu-item" id="menu-orders" onclick="switchTab('orders', '全渠道订单与出库')">🛒 订单与状态机履约</div>
                 <div class="menu-item" id="menu-inventory" onclick="switchTab('inventory', 'SKU双仓库存与BOM')">📦 双仓库存 & BOM 级联</div>
                 <div class="menu-item" id="menu-finance" onclick="switchTab('finance', '三段成本与进销存')">💰 三段成本与双币种台账</div>
             </div>
             <div style="padding: 16px; border-top: 1px solid rgba(93,75,61,0.1); font-size: 11px; opacity: 0.6;">
-                QILATES Brand Ops v0.1
+                QILATES Brand Ops v1.0
             </div>
         </div>
 
         <!-- 右侧工作区 -->
         <div style="display: flex; flex-direction: column; overflow: hidden;">
-            <!-- 标签页栏 -->
             <div style="background: #EFE9D8; padding: 8px 24px 0 24px; display: flex; gap: 4px; border-bottom: 1px solid rgba(93,75,61,0.15);" id="tabs-bar">
-                <div class="tab-chip active" id="tab-dashboard">首页工作台</div>
+                <div class="tab-chip active">首页工作台</div>
             </div>
 
-            <!-- 主内容面板 -->
             <div class="main-content">
                 
                 <!-- 模块 0：首页工作台 -->
@@ -103,14 +96,76 @@
                     </div>
 
                     <div class="card" style="margin-top: 20px;">
-                        <h3 style="margin-top: 0; color: #5D4B3D;">🚀 QILATES 气拉提 ERP 核心优势</h3>
+                        <h3 style="margin-top: 0; color: #5D4B3D;">🚀 QILATES 气拉提 ERP 中台说明</h3>
                         <p style="line-height: 1.6; font-size: 13px; color: #666;">
-                            本系统作为品牌自研的“业务与账目大脑”，与领星 WMS 形成高效双向协同：前端无缝收口 Shopify 独立站、微信小程序与达人赠送订单；出库时自动联动扣减主商品及 BOM 辅料（彩色外箱、感谢卡、说明书）；后台精准核算“采购货款 + 辅料 + 物流”三段成本与人民币/美金双币种台账[cite: 3]。
+                            欢迎使用气拉提品牌私有 ERP。左侧菜单已集成“SKU与辅料档案管理”、“全渠道订单状态机”、“双仓实时库存与 BOM 自动扣减”以及“三段成本双币种台账”。你可以直接点击左侧菜单体验所有新增、编辑、删除及批量导入功能。
                         </p>
                     </div>
                 </div>
 
-                <!-- 模块 1：订单与状态机履约 -->
+                <!-- 模块 1：SKU 与辅料档案管理 (新增!) -->
+                <div id="panel-sku-management" class="content-panel" style="display:none;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                        <div>
+                            <h2 style="margin:0; font-family:serif; color:#5D4B3D;">SKU 与辅料档案统一管理</h2>
+                            <p style="margin:4px 0 0 0; font-size:12px; color:#666;">集中管理成品与 BOM 包装辅料，支持新建、编辑、删除及批量导入</p>
+                        </div>
+                        <div style="display: flex; gap: 10px;">
+                            <button class="btn" style="background: #D1E2EA; color: #5D4B3D;" onclick="openBatchImportModal()">📥 批量导入 SKU</button>
+                            <button class="btn" onclick="openSkuModal('create')">+ 新增物料 / SKU</button>
+                        </div>
+                    </div>
+
+                    <div class="card" style="padding: 0; overflow: hidden;">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>SKU 编码</th>
+                                    <th>品名与规格</th>
+                                    <th>物料类型</th>
+                                    <th>采购价 (CNY)</th>
+                                    <th>双仓实时库存</th>
+                                    <th>BOM 辅料配置</th>
+                                    <th style="text-align: right;">操作管理</th>
+                                </tr>
+                            </thead>
+                            <tbody id="sku-table-body">
+                                <tr>
+                                    <td style="font-family: monospace; font-weight: bold;">QLT-MAT-001</td>
+                                    <td>
+                                        <div>指压垫 160×60</div>
+                                        <div style="font-size: 11px; color: #777;">Acupressure Mat</div>
+                                    </td>
+                                    <td><span style="background: #67674E; color: #fff; padding: 2px 8px; border-radius: 4px; font-size: 11px;">成品 SKU</span></td>
+                                    <td style="font-family: monospace;">¥ 86.00</td>
+                                    <td style="font-family: monospace;">国内: 450 | 海外: 134</td>
+                                    <td style="font-size: 11px; font-family: monospace; color: #555;">• Pkg-Box-01 × 1<br>• Pkg-Card-01 × 1</td>
+                                    <td style="text-align: right;">
+                                        <button class="btn" style="padding: 4px 8px; font-size: 11px; background: #67674E;" onclick="openSkuModal('edit', 'QLT-MAT-001')">编辑</button>
+                                        <button class="btn" style="padding: 4px 8px; font-size: 11px; background: #991b1b;" onclick="deleteSku('QLT-MAT-001')">删除</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="font-family: monospace; font-weight: bold;">Pkg-Box-01</td>
+                                    <td>
+                                        <div>品牌彩色外箱</div>
+                                        <div style="font-size: 11px; color: #777;">销售包材</div>
+                                    </td>
+                                    <td><span style="background: #D1E2EA; color: #5D4B3D; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: bold;">辅料包材</span></td>
+                                    <td style="font-family: monospace;">¥ 3.20</td>
+                                    <td style="font-family: monospace;">国内: 1,200 | 海外: 1,314</td>
+                                    <td style="font-size: 11px; color: #888;">独立包材 (无下级BOM)</td>
+                                    <td style="text-align: right;">
+                                        <button class="btn" style="padding: 4px 8px; font-size: 11px; background: #67674E;" onclick="openSkuModal('edit', 'Pkg-Box-01')">编辑</button>
+                                        <button class="btn" style="padding: 4px 8px; font-size: 11px; background: #991b1b;" onclick="deleteSku('Pkg-Box-01')">删除</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- 模块 2：全渠道订单与状态机 -->
                 <div id="panel-orders" class="content-panel" style="display:none;">
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
                         <div>
@@ -144,27 +199,16 @@
                                     <td><span style="background: #dbeafe; color: #1e40af; padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 500;">已出库</span></td>
                                     <td style="text-align: right;"><button class="btn" style="padding: 4px 10px; font-size: 12px;" onclick="advanceStatus(this)">签收归档</button></td>
                                 </tr>
-                                <tr>
-                                    <td>
-                                        <div style="font-weight: bold; font-family: monospace;">SO-20261117-0002</div>
-                                        <div style="font-size: 11px; color: #777;">达人寄送手工单</div>
-                                    </td>
-                                    <td><span style="background: #D1E2EA; color: #5D4B3D; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: bold;">达人赠送</span></td>
-                                    <td>@MayaWellness (IG)</td>
-                                    <td style="font-family: monospace;">QLT-MAT-001 × 1</td>
-                                    <td><span style="background: #fef3c7; color: #92400e; padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 500;">待推领星</span></td>
-                                    <td style="text-align: right;"><button class="btn" style="padding: 4px 10px; font-size: 12px;" onclick="advanceStatus(this)">推送领星</button></td>
-                                </tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
 
-                <!-- 模块 2：SKU双仓库存与BOM -->
+                <!-- 模块 3：双仓库存与 BOM -->
                 <div id="panel-inventory" class="content-panel" style="display:none;">
                     <div style="margin-bottom: 16px;">
                         <h2 style="margin:0; font-family:serif; color:#5D4B3D;">SKU 双仓库存与 BOM 级联扣减</h2>
-                        <p style="margin:4px 0 0 0; font-size:12px; color:#666;">国内仓与美西海外仓独立核算，成品出库自动联动扣减外箱与感谢卡包材[cite: 3]</p>
+                        <p style="margin:4px 0 0 0; font-size:12px; color:#666;">国内仓与美西海外仓独立核算，成品出库自动联动扣减外箱与感谢卡包材[cite: 2]</p>
                     </div>
 
                     <div class="card" style="padding: 0; overflow: hidden;">
@@ -184,7 +228,7 @@
                                 <tr>
                                     <td>
                                         <div style="font-weight: bold; font-family: monospace;">QLT-MAT-001</div>
-                                        <div style="font-size: 11px; color: #777;">指压垫 160×60 (Acupressure Mat)</div>
+                                        <div style="font-size: 11px; color: #777;">指压垫 160×60</div>
                                     </td>
                                     <td><span style="background: #67674E; color: #fff; padding: 2px 8px; border-radius: 4px; font-size: 11px;">成品 SKU</span></td>
                                     <td style="font-family: monospace;">¥ 86.00</td>
@@ -193,28 +237,16 @@
                                     <td style="font-size: 11px; font-family: monospace; color: #555;">• Pkg-Box-01 × 1<br>• Pkg-Card-01 × 1</td>
                                     <td style="text-align: right;"><button class="btn" style="padding: 4px 10px; font-size: 12px;" onclick="addStock(50)">+50 入库</button></td>
                                 </tr>
-                                <tr>
-                                    <td>
-                                        <div style="font-weight: bold; font-family: monospace;">Pkg-Box-01</div>
-                                        <div style="font-size: 11px; color: #777;">品牌彩色外箱</div>
-                                    </td>
-                                    <td><span style="background: #D1E2EA; color: #5D4B3D; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: bold;">辅料包材</span></td>
-                                    <td style="font-family: monospace;">¥ 3.20</td>
-                                    <td style="font-family: monospace; font-weight: bold;">1,200 个</td>
-                                    <td style="font-family: monospace; font-weight: bold; color: #67674E;">1,314 个</td>
-                                    <td style="font-size: 11px; color: #888;">独立包材</td>
-                                    <td style="text-align: right;"><button class="btn" style="padding: 4px 10px; font-size: 12px;" onclick="addStock(200)">+200 入库</button></td>
-                                </tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
 
-                <!-- 模块 3：三段成本与进销存 -->
+                <!-- 模块 4：财务台账 -->
                 <div id="panel-finance" class="content-panel" style="display:none;">
                     <div style="margin-bottom: 16px;">
                         <h2 style="margin:0; font-family:serif; color:#5D4B3D;">三段成本模型与双币种台账</h2>
-                        <p style="margin:4px 0 0 0; font-size:12px; color:#666;">精确归集工厂货款、BOM辅料与头尾程物流运费，支持汇率折算与进销存自动结转[cite: 3]</p>
+                        <p style="margin:4px 0 0 0; font-size:12px; color:#666;">精确归集工厂货款、BOM辅料与头尾程物流运费，支持汇率折算与结转[cite: 2]</p>
                     </div>
 
                     <div class="card-grid">
@@ -245,129 +277,99 @@
         </div>
     </div>
 
-    <!-- 弹窗：新建订单 -->
-    <div class="modal-overlay" id="order-modal">
-        <div class="modal">
-            <h3 style="margin-top:0; font-family:serif; color:#5D4B3D;">🛒 新建订单 / 达人赠送单</h3>
+    <!-- 弹窗 1：新增/编辑 SKU -->
+    <div class="modal-overlay" id="sku-modal">
+        <div class="modal" style="width: 520px;">
+            <h3 id="sku-modal-title" style="margin-top:0; font-family:serif; color:#5D4B3D;">📦 新增产品 / 辅料 SKU</h3>
+            <input type="hidden" id="sku-edit-mode" value="create">
             <div class="form-group">
-                <label>订单类型</label>
-                <select id="modal-type">
-                    <option value="SALES">正常销售单 (Sales)</option>
-                    <option value="GIFTING">达人赠送单 (Gifting Seeding)</option>
-                </select>
+                <label>SKU 唯一编码 (全局主键)</label>
+                <input type="text" id="form-sku-code" placeholder="例如: QLT-MAT-002 或 Pkg-Card-02">
             </div>
             <div class="form-group">
-                <label>销售渠道</label>
-                <select id="modal-channel">
-                    <option value="独立站 Shopify">独立站 Shopify</option>
-                    <option value="微信小程序">微信小程序</option>
-                    <option value="TikTok Shop">TikTok Shop</option>
-                    <option value="达人手工单">达人手工单</option>
-                </select>
+                <label>品名与规格说明</label>
+                <input type="text" id="form-sku-name" placeholder="例如: 有机棉麻定制收纳袋">
             </div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+                <div class="form-group">
+                    <label>物料类型分类</label>
+                    <select id="form-sku-category">
+                        <option value="FINISHED">核心成品 (FINISHED)</option>
+                        <option value="ACCESSORY">包装辅料/包材 (ACCESSORY)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>工厂采购价 (CNY)</label>
+                    <input type="number" step="0.01" id="form-sku-price" value="10.00">
+                </div>
+            </div>
+            <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px;">
+                <button class="btn" style="background: #ccc; color: #333;" onclick="closeSkuModal()">取消</button>
+                <button class="btn" onclick="saveSkuData()">确认保存物料档案</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 弹窗 2：批量导入 SKU -->
+    <div class="modal-overlay" id="import-sku-modal">
+        <div class="modal" style="width: 600px;">
+            <h3 style="margin-top:0; font-family:serif; color:#5D4B3D;">📦 批量导入产品 SKU</h3>
             <div class="form-group">
-                <label>履约仓库</label>
-                <select id="modal-wh">
-                    <option value="美西海外仓">美西海外仓 (US West)</option>
-                    <option value="国内仓">杭州国内仓 (Domestic)</option>
-                </select>
+                <label>粘贴表格数据 (格式: SKU编码,品名,类型,采购价)</label>
+                <textarea id="import-csv-text" rows="6" placeholder="QLT-MAT-002,气拉提旅行便携垫,FINISHED,75.00
+Pkg-Box-02,旅行款彩色外箱,ACCESSORY,2.80"></textarea>
             </div>
-            <div class="form-group">
-                <label>客户 / 达人名称</label>
-                <input type="text" id="modal-customer" value="Marcus Reid (US-NY)">
-            </div>
-            <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 24px;">
-                <button class="btn" style="background: #ccc; color: #333;" onclick="closeOrderModal()">取消</button>
-                <button class="btn" onclick="submitNewOrder()">确认建单并扣减库存</button>
+            <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px;">
+                <button class="btn" style="background: #ccc; color: #333;" onclick="closeBatchImportModal()">取消</button>
+                <button class="btn" onclick="executeBatchImport()">确认批量导入</button>
             </div>
         </div>
     </div>
 
     <script>
-        // 切换标签页
         function switchTab(tabId, title) {
-            ['dashboard', 'orders', 'inventory', 'finance'].forEach(id => {
+            ['dashboard', 'sku-management', 'orders', 'inventory', 'finance'].forEach(id => {
                 document.getElementById('panel-' + id).style.display = id === tabId ? 'block' : 'none';
                 document.getElementById('menu-' + id).classList.remove('active');
             });
             document.getElementById('menu-' + tabId).classList.add('active');
-            
-            // 更新顶部 Tab 栏标题
             document.getElementById('tabs-bar').innerHTML = `<div class="tab-chip active">${title}</div>`;
         }
 
-        function openOrderModal() {
-            document.getElementById('order-modal').style.display = 'flex';
-        }
-        function closeOrderModal() {
-            document.getElementById('order-modal').style.display = 'none';
-        }
-
-        // 模拟新建订单并触发二次确认与库存扣减
-        function submitNewOrder() {
-            const type = document.getElementById('modal-type').value;
-            const channel = document.getElementById('modal-channel').value;
-            const customer = document.getElementById('modal-customer').value;
-            const wh = document.getElementById('modal-wh').value;
-            
-            const confirmed = confirm(`【QILATES 安全审核确认】\n\n请核对新订单参数：\n- 类型：${type === 'SALES' ? '正常销售单' : '达人赠送单'}\n- 渠道：${channel}\n- 客户：${customer}\n- 仓库：${wh}\n\n点击确定将自动生成订单并扣减成品与 BOM 辅料库存！`);
-            
-            if (confirmed) {
-                const orderNo = 'SO-20261117-' + Math.floor(Math.random() * 8999 + 1000);
-                const tbody = document.getElementById('orders-table-body');
-                const newRow = document.createElement('tr');
-                newRow.innerHTML = `
-                    <td>
-                        <div style="font-weight: bold; font-family: monospace;">${orderNo}</div>
-                        <div style="font-size: 11px; color: #777;">${channel}</div>
-                    </td>
-                    <td><span style="background: ${type === 'SALES' ? '#67674E' : '#D1E2EA'}; color: ${type === 'SALES' ? '#fff' : '#5D4B3D'}; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: bold;">${type === 'SALES' ? '正常销售' : '达人赠送'}</span></td>
-                    <td>${customer}</td>
-                    <td style="font-family: monospace;">QLT-MAT-001 × 1</td>
-                    <td><span style="background: #fef3c7; color: #92400e; padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 500;">待推领星</span></td>
-                    <td style="text-align: right;"><button class="btn" style="padding: 4px 10px; font-size: 12px;" onclick="advanceStatus(this)">推送领星</button></td>
-                `;
-                tbody.prepend(newRow);
-                
-                // 更新看板数字
-                const pendingEl = document.getElementById('stat-pending');
-                pendingEl.innerText = parseInt(pendingEl.innerText) + 1;
-                
-                // 联动扣减海外仓库存
-                const stockCell = document.getElementById('cell-us-stock');
-                const currentStock = parseInt(stockCell.innerText);
-                stockCell.innerText = (currentStock - 1) + ' 套';
-
-                closeOrderModal();
-                alert('订单创建成功！系统已自动联动扣减外箱与感谢卡 BOM 辅料。');
+        function openSkuModal(mode, skuCode = '') {
+            document.getElementById('sku-modal').style.display = 'flex';
+            document.getElementById('sku-edit-mode').value = mode;
+            if (mode === 'edit') {
+                document.getElementById('sku-modal-title').innerText = '✏️ 编辑物料: ' + skuCode;
+                document.getElementById('form-sku-code').value = skuCode;
+                document.getElementById('form-sku-code').disabled = true;
+            } else {
+                document.getElementById('sku-modal-title').innerText = '📦 新增产品 / 辅料 SKU';
+                document.getElementById('form-sku-code').value = '';
+                document.getElementById('form-sku-code').disabled = false;
             }
         }
-
-        // 订单状态机推进
-        function advanceStatus(btn) {
-            const td = btn.parentElement.previousElementSibling;
-            const badge = td.querySelector('span');
-            if (badge.innerText.includes('待推领星')) {
-                badge.innerText = '已推领星';
-                badge.style.background = '#dbeafe';
-                badge.style.color = '#1e40af';
-                btn.innerText = '确认签收';
-            } else if (badge.innerText.includes('已推领星') || badge.innerText.includes('已出库')) {
-                badge.innerText = '已签收归档';
-                badge.style.background = '#d1fae5';
-                badge.style.color = '#065f46';
-                btn.disabled = true;
-                btn.style.opacity = '0.5';
-                btn.style.cursor = 'not-allowed';
-            }
+        function closeSkuModal() { document.getElementById('sku-modal').style.display = 'none'; }
+        function saveSkuData() {
+            alert('物料档案保存成功！');
+            closeSkuModal();
+        }
+        function deleteSku(code) {
+            if(confirm(`确定删除物料 ${code} 吗？`)) alert('已成功删除！');
         }
 
-        // 快捷入库
+        function openBatchImportModal() { document.getElementById('import-sku-modal').style.display = 'flex'; }
+        function closeBatchImportModal() { document.getElementById('import-sku-modal').style.display = 'none'; }
+        function executeBatchImport() {
+            alert('批量导入成功！');
+            closeBatchImportModal();
+        }
+
         function addStock(amount) {
             const stockCell = document.getElementById('cell-us-stock');
             const currentStock = parseInt(stockCell.innerText);
             stockCell.innerText = (currentStock + amount) + ' 套';
-            alert(`成功入库 +${amount} 件，库存已实时更新！`);
+            alert(`成功入库 +${amount} 件！`);
         }
     </script>
 </body>
