@@ -1,376 +1,238 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QILATES · 气拉提 ERP 业务中台 (OMS)</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap');
-        body { margin: 0; background-color: #F3EEDF; color: #5D4B3D; font-family: 'Roboto', sans-serif; }
-        .app-container { display: grid; height: 100vh; grid-template-rows: 50px 1fr; grid-template-columns: 240px 1fr; }
-        .top-bar { grid-column: 1 / 3; background-color: #5D4B3D; color: #F3EEDF; display: flex; align-items: center; justify-content: space-between; padding: 0 20px; border-bottom: 2px solid #67674E; }
-        .sidebar { background-color: #FAF8F2; border-right: 1px solid rgba(93,75,61,0.15); display: flex; flex-direction: column; justify-content: space-between; overflow-y: auto; }
-        .main-content { background-color: #F3EEDF; padding: 24px; overflow-y: auto; }
-        
-        .menu-item { padding: 12px 20px; cursor: pointer; font-size: 13px; color: #5D4B3D; display: flex; align-items: center; gap: 10px; transition: all 0.2s; }
-        .menu-item:hover, .menu-item.active { background-color: #67674E; color: #FFFFFF; font-weight: 500; }
-        .tab-chip { padding: 6px 16px; background: #FAF8F2; border-radius: 6px 6px 0 0; font-size: 13px; cursor: pointer; color: #5D4B3D; border: 1px solid rgba(93,75,61,0.15); border-bottom: none; display: inline-flex; align-items: center; gap: 8px; }
-        .tab-chip.active { background: #F3EEDF; font-weight: bold; border-top: 3px solid #67674E; }
-
-        .card-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 24px; }
-        .card { background: #FAF8F2; padding: 20px; border-radius: 12px; border: 1px solid rgba(93,75,61,0.15); box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
-        .btn { background: #67674E; color: white; border: none; padding: 8px 16px; border-radius: 8px; cursor: pointer; font-weight: 500; font-size: 13px; transition: background 0.2s; }
-        .btn:hover { background: #53533e; }
-        
-        table { width: 100%; border-collapse: collapse; text-align: left; font-size: 13px; }
-        th { background: #EFE9D8; color: #5D4B3D; padding: 12px; font-weight: 600; border-bottom: 2px solid rgba(93,75,61,0.15); }
-        td { padding: 12px; border-bottom: 1px solid rgba(93,75,61,0.1); }
-        
-        .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.4); display: none; justify-content: center; align-items: center; z-index: 100; backdrop-filter: blur(2px); }
-        .modal { background: #FAF8F2; padding: 30px; border-radius: 16px; width: 480px; border: 1px solid rgba(93,75,61,0.2); box-shadow: 0 10px 25px rgba(0,0,0,0.2); }
-        .form-group { margin-bottom: 16px; }
-        .form-group label { display: block; font-size: 12px; font-weight: 600; margin-bottom: 6px; color: #5D4B3D; }
-        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 10px 12px; border: 1px solid rgba(93,75,61,0.2); border-radius: 8px; box-sizing: border-box; background: #F3EEDF; font-size: 13px; color: #5D4B3D; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>自研 ERP</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{font:14px/1.5 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif;color:#1f2329;background:#f2f3f7;display:flex;flex-direction:column}
+.top{height:56px;background:#0a1a3f;color:#fff;display:flex;align-items:flex-end;flex:none}
+.logo{width:200px;height:56px;display:flex;align-items:center;gap:10px;padding:0 16px;font-size:20px;font-weight:600}
+.logo b{width:34px;height:34px;border-radius:8px;background:#fff;color:#2d5bff;display:grid;place-items:center;font-size:18px}
+.tabs{display:flex;flex:1;height:40px;overflow:auto}
+.tab{padding:0 18px;display:flex;align-items:center;gap:8px;color:#c5cbe0;cursor:pointer;white-space:nowrap;border-radius:6px 6px 0 0}
+.tab.on{background:#fff;color:#1f2329;font-weight:600}
+.tab i{font-style:normal;opacity:.6}
+.tr{margin-left:auto;display:flex;align-items:center;gap:20px;padding:0 20px;height:56px;color:#dfe3f2}
+.av{width:30px;height:30px;border-radius:50%;background:#7a8bd6;display:grid;place-items:center;font-size:12px}
+.main{flex:1;display:flex;min-height:0}
+.side{width:200px;background:#fff;border-right:1px solid #e6e8ee;overflow:auto;padding:10px;flex:none}
+.mi{padding:10px 12px;border-radius:8px;cursor:pointer;display:flex;align-items:center;gap:10px;font-size:15px;margin-bottom:4px}
+.mi:hover{background:#f3f5fb}
+.mi.on{background:#e8eefd;color:#2d5bff;font-weight:600}
+.mi .ar{margin-left:auto;font-size:11px;color:#8a90a0;transition:.2s}
+.grp.open>.mi .ar{transform:rotate(180deg)}
+.sub{display:none}.grp.open .sub{display:block}
+.sub .mi{padding-left:44px;font-size:14px;color:#4a5060}
+.sub .mi.on{color:#2d5bff}
+.content{flex:1;overflow:auto;padding:0 0 30px}
+.upd{background:#fff;height:54px;display:flex;align-items:center;justify-content:flex-end;padding:0 28px;color:#6b7280;border-bottom:1px solid #eef0f4;margin-bottom:16px}
+.wrap{padding:0 16px}
+.row{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:16px}
+.card{background:#fff;border-radius:8px;padding:20px 24px;flex:1;min-width:200px;box-shadow:0 1px 2px rgba(0,0,0,.03)}
+.card h4{font-size:17px;margin-bottom:14px}
+.cg{display:flex;gap:40px}
+.cg small{color:#6b7280;font-size:14px;display:block}
+.cg strong{font-size:34px;color:#c3c7d0;font-weight:700;line-height:1.3}
+.cg strong.hot{color:#2d5bff}
+.panel{background:#fff;border-radius:8px;padding:22px 24px;margin-bottom:16px}
+.ph{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;flex-wrap:wrap;gap:10px}
+.ph h3{font-size:18px}
+.seg{display:flex}
+.seg button{padding:7px 22px;border:1px solid #d9dce3;background:#fff;cursor:pointer;font-size:14px;margin-left:-1px}
+.seg button.on{border-color:#2d5bff;color:#2d5bff;position:relative;z-index:1}
+.stats{display:flex;gap:30px;margin-bottom:10px;flex-wrap:wrap}
+.st{width:250px;padding:18px 28px;border-radius:6px;border-top:4px solid;box-shadow:0 2px 10px rgba(0,0,0,.07)}
+.st small{color:#555;font-size:15px}.st div{font-size:30px;font-weight:700}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{padding:10px 12px;border-bottom:1px solid #eef0f4;text-align:left;vertical-align:top}
+th{background:#f7f8fb;color:#4a5060;font-weight:600;white-space:nowrap}
+.tag{display:inline-block;padding:1px 8px;border-radius:10px;font-size:12px;background:#e8eefd;color:#2d5bff}
+.tag.g{background:#e6f6ec;color:#16a34a}.tag.o{background:#fff3e0;color:#d97706}.tag.r{background:#fdecec;color:#dc2626}
+.note{background:#f7f8fb;border-left:3px solid #2d5bff;padding:10px 14px;margin-top:14px;color:#4a5060;border-radius:4px}
+.flow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:6px 0 10px}
+.flow span{background:#f3f5fb;border:1px solid #dfe4f3;border-radius:6px;padding:6px 12px}
+.flow em{font-style:normal;color:#8a90a0}
+.fab{position:fixed;left:50%;bottom:0;transform:translateX(-50%);background:#2d5bff;color:#fff;padding:8px 20px;border-radius:20px 20px 0 0;cursor:pointer;font-weight:600}
+@media(max-width:800px){.side{width:64px}.mi span,.mi .ar{display:none}.sub .mi{padding-left:12px}.logo{width:auto}.logo span{display:none}}
+</style>
 </head>
 <body>
+<div class="top">
+  <div class="logo"><b>X</b><span>自研 ERP</span></div>
+  <div class="tabs" id="tabs"></div>
+  <div class="tr"><span>🧮 试算</span><span>中文 ▾</span><div class="av">MY</div><span>ADMIN</span></div>
+</div>
+<div class="main">
+  <nav class="side" id="side"></nav>
+  <section class="content"><div class="upd" id="upd"></div><div class="wrap" id="view"></div></section>
+</div>
+<div class="fab" onclick="alert('服务：对接领星 API 前，请先确认 PPT P16 的 5 项待确认事项')">❓ 服务</div>
 
-    <div class="app-container">
-        <!-- 顶部通栏 -->
-        <div class="top-bar">
-            <div style="display: flex; align-items: center; gap: 10px;">
-                <div style="width: 28px; height: 28px; background: #67674E; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-family: serif; font-weight: bold; font-size: 16px;">Q</div>
-                <span style="font-family: serif; font-size: 18px; font-weight: bold; letter-spacing: 0.5px;">QILATES <span style="font-size: 12px; font-weight: normal; opacity: 0.8;">ERP 业务中台</span></span>
-            </div>
-            <div style="display: flex; align-items: center; gap: 16px; font-size: 12px;">
-                <span style="background: rgba(255,255,255,0.15); padding: 4px 10px; border-radius: 12px;">运行环境：零报错自包含架构</span>
-                <span style="opacity: 0.8; cursor: pointer;">账号: QILATES_OPS</span>
-            </div>
-        </div>
+<script>
+const T = (h) => h; // 方便后续替换为 i18n
+const tbl = (cols, rows) => `<table><thead><tr>${cols.map(c=>`<th>${c}</th>`).join('')}</tr></thead><tbody>${rows.map(r=>`<tr>${r.map(c=>`<td>${c}</td>`).join('')}</tr>`).join('')}</tbody></table>`;
+const tag = (t,c='') => `<span class="tag ${c}">${t}</span>`;
+const flow = (a) => `<div class="flow">${a.map(x=>`<span>${x}</span>`).join('<em>→</em>')}</div>`;
+const note = (t) => `<div class="note">${t}</div>`;
+const panel = (h, b) => `<div class="panel"><div class="ph"><h3>${h}</h3></div>${b}</div>`;
 
-        <!-- 左侧折叠菜单 -->
-        <div class="sidebar">
-            <div style="padding: 12px 0;">
-                <div class="menu-item active" id="menu-dashboard" onclick="switchTab('dashboard', '首页工作台')">📊 首页工作台</div>
-                <div class="menu-item" id="menu-sku-management" onclick="switchTab('sku-management', 'SKU与辅料档案')">📋 SKU 与辅料档案管理</div>
-                <div class="menu-item" id="menu-orders" onclick="switchTab('orders', '全渠道订单与出库')">🛒 订单与状态机履约</div>
-                <div class="menu-item" id="menu-inventory" onclick="switchTab('inventory', 'SKU双仓库存与BOM')">📦 双仓库存 & BOM 级联</div>
-                <div class="menu-item" id="menu-finance" onclick="switchTab('finance', '三段成本与进销存')">💰 三段成本与双币种台账</div>
-            </div>
-            <div style="padding: 16px; border-top: 1px solid rgba(93,75,61,0.1); font-size: 11px; opacity: 0.6;">
-                QILATES Brand Ops v1.0
-            </div>
-        </div>
+/* ===== 页面内容（来自 PPT P4–P16）===== */
+const pages = {
+  products: { t:'物料主数据', html: () =>
+    panel('A. 电子产品（成品 SKU）', tbl(['SKU 编码','品名 / 规格','采购价 (CNY)','建议售价 (USD)','毛重','BOM 辅料'],
+      [['QLT-MAT-001','指压垫 160×60','¥ 86.00','$ 49.00','2.4 kg','外箱 / 说明书 / 感谢卡']])) +
+    panel('B. 包装辅料（包材 / 赠品）', tbl(['辅料 SKU','品名 / 单位','单价 (CNY)','单件用量','用途标签','所在仓'],
+      [['Pkg-Box-01','彩色外箱 / 个','¥ 3.20','1 / 单',tag('销售包材'),'海外仓'],
+       ['Pkg-Card-01','感谢卡 / 张','¥ 0.30','1 / 单',tag('销售包材'),'海外仓'],
+       ['Gift-001','达人赠品 / 个','¥ 12.00','按单',tag('达人赠品','o'),'国内仓']]) +
+    note('SKU 全局唯一，国内仓 / 海外仓 / 领星 / 独立站共用；辅料通过 BOM 随成品出库自动扣减。')) },
+  inbound: { t:'入库管理', html: () =>
+    panel('线 1 · 成品采购', flow(['下采购单（工厂 CNY）','到货验收','国内仓库存 +','应付账款 +','工厂对账付款','回写实际成本'])) +
+    panel('线 2 · 辅料采购', flow(['包材 / 卡片 / 赠品到货','国内仓辅料库存 +','（可选）随头程发海外仓'])) +
+    panel('线 3 · 头程发海外仓', flow(['国内仓库存 −（在途）','ERP 推备货单到领星 API','货代承运','海外仓签收 → 海外仓库存 +','运费摊销回写成本']) +
+    note('国内扣减 ≠ 海外入库，中间为“在途”状态；头程运费按箱 / 重量摊销到 SKU，入仓时计入单位成本。')) },
+  outbound: { t:'出库管理', html: () =>
+    panel('出库类型', tbl(['出库类型','触发来源','库存动作','财务动作','推领星'],
+      [['销售出库','小程序 / 独立站 / 平台订单自动入 ERP','海外仓成品 −1，BOM 辅料同步 −','记收入 USD、COGS、尾程运费',tag('自动','g')],
+       ['达人赠送 / 样品','运营在 ERP 手工建单','海外仓成品 −1，BOM 辅料同步 −','无收入；计入“达人寄送费用”',tag('手工触发','o')],
+       ['补发 / 客诉','关联原订单，客服建单','海外仓成品 −1，走售后单','无新增收入；计入“售后成本”',tag('是','g')],
+       ['盘点损耗 / 自取','月度盘点差异','对应仓库账 −，主管审批','计入盘亏 / 营业外',tag('否','r')]])) +
+    panel('统一状态机', flow(['待发货','已推领星','仓库已接单','已出库（拿追踪号）','已签收 / 已完成']))},
+  report: { t:'月度进销存', html: () =>
+    panel('2026-11 · SKU × 仓库（示例占位数据）', tbl(['SKU / 仓库','期初','本月入库','本月出库','期末','销售额 (USD)','货品成本 (CNY)'],
+      [['QLT-MAT-001 / 美西仓',120,200,186,134,'$ 9,114','¥ 15,996'],
+       ['QLT-MAT-001 / 国内仓',500,300,350,450,'—','—'],
+       ['Pkg-Box-01 / 美西仓',500,'1,000',186,'1,314','—','¥ 595'],
+       ['达人寄送（合计）','—','—',42,'—','$ 0','¥ 3,612']]) +
+    note('口径：按月切；期初 = 上月期末；入库 = 采购 + 头程到仓；出库按销售 / 达人 / 补发 / 损耗分列。附加视图：在途、动销 30/90 天、低库存预警。')) },
+  decision: { t:'下单入口决策', html: () =>
+    panel('方案 A（领星下单） vs 方案 B（自研 ERP 下单，推荐）', tbl(['维度','方案 A：领星 ERP','方案 B：自研 ERP ' + tag('推荐','g')],
+      [['达人赠送 / 样品','走“0 元订单”，字段硬凑，无法单独汇总','原生“出库类型=达人赠送”，无收入自动记成本'],
+       ['小程序 / 独立站','需额外中间件，数据不在自己手里','直接收 webhook，一手掌握'],
+       ['辅料成本','BOM 支持弱，对不上订单','BOM 自动扣辅料并算包材成本'],
+       ['关闭原进销存','不能关闭，自研沦为报表','可关闭，领星降级为物流 + 仓储通道'],
+       ['代价','开发量小，业务被锁死','需做订单 / 库存 / 对接层，但灵活可控']])) },
+  lingxing: { t:'领星对接', html: () =>
+    panel('下行：ERP → 领星', tbl(['接口','用途','状态'],
+      [['POST /orders','销售单、达人单、补发单',tag('阶段 2 · 先跑达人单','o')],
+       ['POST /stock-up','头程备货单（指定海外仓 + 渠道）',tag('阶段 2','o')]])) +
+    panel('上行：领星 → ERP', tbl(['方式','内容','频率'],
+      [['Webhook','出库回传、追踪号、物流轨迹','实时'],
+       ['定时拉取','海外仓库存数量（只读，先对账 1 周）','每日 1 次'],
+       ['账单回写','尾程运费、仓储费','按月对账']]) +
+    note('实施：① 申请 API 凭证并授权海外仓 → ② 库存只读对账 → ③ 订单下行（灰度达人单→销售单）→ ④ 账单回写。通信为服务器到服务器，不暴露给前端。')) },
+  channels: { t:'渠道接入', html: () =>
+    panel('渠道层', tbl(['渠道','接入方式','要点'],
+      [['微信小程序','后端 → ERP：订单创建 / 支付成功 / 退款 webhook','库存查询调 ERP 接口，避免超卖'],
+       ['独立站（Shopify）','orders/create、orders/paid、orders/updated','USD 原币入账；发货状态、追踪号回写'],
+       ['亚马逊 / Temu','不直连，ERP 从领星回拉','映射表：领星订单号 ↔ 自研订单号']]) +
+    note('统一编号 SO-YYYYMMDD-XXXX，推领星时携带自研单号作为外部单号。')) },
+  cost: { t:'成本归集', html: () =>
+    panel('单订单成本 = 货 + 辅料 + 物流', tbl(['','① 货物成本 COGS','② 辅料成本','③ 物流成本'],
+      [['来源','采购入库单','BOM 自动展开','领星账单回写'],
+       ['币种','CNY','CNY','混合（USD 为主）'],
+       ['口径','移动加权平均','外箱 / 说明书 / 卡片 / 赠品','头程摊销 + 尾程 + 仓储'],
+       ['触发','销售出库结转','随销售出库扣减','尾程出库记，月末对账']]) +
+    note('不进本系统：营销推广费（Facebook / 达人佣金 / 广告费）。')) },
+  fx: { t:'双币种账单', html: () =>
+    panel('收入端（USD）', flow(['独立站 / 小程序 USD 标价','Stripe / PayPal 扣手续费','美元账户到账'])) +
+    panel('支出端（CNY + USD）', tbl(['支出项','原币','付款对象','触发节点','ERP 记录'],
+      [['工厂货款','CNY','工厂对公','采购入库','应付 → 付款核销'],
+       ['包材 / 辅料','CNY','包材商','辅料入库','应付 → 付款核销'],
+       ['头程物流','CNY/USD','货代 / 领星','头程发货','按箱摊销到 SKU'],
+       ['尾程 + 仓储','USD','海外仓 / 物流商','出库 + 月末账单','订单级尾程费 + 月度仓储费']]) +
+    note('每笔记原币 + 当月记账汇率；月末同时出“原币合计”与“折人民币合计”，不做实时汇兑损益。')) },
+  roadmap: { t:'开发路线', html: () =>
+    panel('4 阶段 · 约 7 周', tbl(['阶段','周期','内容','验收'],
+      [['1 地基','第 1–2 周','SKU 主数据、国内仓出入库、月度报表','手工录入入库，报表出数'],
+       ['2 领星打通','第 3–4 周','API 凭证、拉海外仓库存、达人单下行','库存对账一致，达人单可出库'],
+       ['3 渠道接入','第 5–6 周','小程序 / Shopify webhook，销售单全切','下单自动出单并推领星'],
+       ['4 成本关账','第 7 周','BOM 扣辅料、尾程费回写、双币种利润表','领星进销存下线']]) +
+    note('每阶段先 1 周手工双轨，对账无差异再切流量；领星账号保留 1 个月只读权限作回滚。')) },
+  todo: { t:'风险与待确认', html: () =>
+    panel('开工前须确认的 5 件事', tbl(['#','事项','重要性','对接人'],
+      [[1,'领星开放 API 权限清单',tag('能否推达人单、拉尾程账单','r'),'领星客户经理 + 技术'],
+       [2,'海外仓是否接受自研 ERP 经领星 API 直接下单',tag('已确认可以','g'),'海外仓 + 领星'],
+       [3,'头程 / 尾程账单粒度','决定成本取数方式','物流 / 海外仓财务'],
+       [4,'历史库存期初导入','以领星数还是盘点数','运营 + 仓库'],
+       [5,'记账汇率口径','月初中行中间价 or 实际结汇','财务负责人']])) },
+  settings: { t:'系统设置', html: () => panel('系统设置', '<p>用户、角色权限、汇率口径、领星 client_id / secret 配置（占位）。</p>') }
+};
 
-        <!-- 右侧工作区 -->
-        <div style="display: flex; flex-direction: column; overflow: hidden;">
-            <div style="background: #EFE9D8; padding: 8px 24px 0 24px; display: flex; gap: 4px; border-bottom: 1px solid rgba(93,75,61,0.15);" id="tabs-bar">
-                <div class="tab-chip active">首页工作台</div>
-            </div>
+/* ===== 左侧菜单 ===== */
+const menu = [
+  {id:'home',t:'首页',i:'🏠'},
+  {t:'订单中心',i:'📋',c:[['outbound','出库管理（销售 / 达人 / 补发）']]},
+  {t:'库存中心',i:'📦',c:[['products','物料主数据'],['inbound','入库管理'],['report','月度进销存']]},
+  {t:'系统对接',i:'🔗',c:[['decision','下单入口决策'],['lingxing','领星对接'],['channels','渠道接入']]},
+  {t:'成本中心',i:'💰',c:[['cost','成本归集'],['fx','双币种账单']]},
+  {t:'项目管理',i:'🛣️',c:[['roadmap','开发路线'],['todo','风险与待确认']]},
+  {id:'settings',t:'系统设置',i:'⚙️'}
+];
+const titleOf = id => id==='home' ? '首页' : pages[id].t;
+let open = ['home'], cur = 'home';
 
-            <div class="main-content">
-                
-                <!-- 模块 0：首页工作台 -->
-                <div id="panel-dashboard" class="content-panel">
-                    <div class="card-grid">
-                        <div class="card">
-                            <div style="font-size: 12px; color: #777; font-weight: bold;">待处理订单 (待推领星)</div>
-                            <div style="font-size: 32px; font-weight: bold; margin-top: 10px; color: #67674E;" id="stat-pending">2</div>
-                            <div style="font-size: 11px; color: #888; margin-top: 6px;">多渠道自动化同步中</div>
-                        </div>
-                        <div class="card">
-                            <div style="font-size: 12px; color: #777; font-weight: bold;">美西海外仓可用成品</div>
-                            <div style="font-size: 32px; font-weight: bold; margin-top: 10px; color: #5D4B3D;" id="stat-us-stock">134 <span style="font-size: 14px; font-weight: normal;">张</span></div>
-                            <div style="font-size: 11px; color: #888; margin-top: 6px;">指压垫 QLT-MAT-001</div>
-                        </div>
-                        <div class="card">
-                            <div style="font-size: 12px; color: #777; font-weight: bold;">头程在途货件</div>
-                            <div style="font-size: 32px; font-weight: bold; margin-top: 10px; color: #67674E;">200 <span style="font-size: 14px; font-weight: normal;">件</span></div>
-                            <div style="font-size: 11px; color: #888; margin-top: 6px;">美西海运快船 (Matson)</div>
-                        </div>
-                        <div class="card">
-                            <div style="font-size: 12px; color: #777; font-weight: bold;">本月预估毛利润</div>
-                            <div style="font-size: 26px; font-weight: bold; margin-top: 10px; color: #5D4B3D;">¥ 24,850</div>
-                            <div style="font-size: 11px; color: #888; margin-top: 6px;">综合毛利率 62.4%</div>
-                        </div>
-                    </div>
+function renderSide(){
+  document.getElementById('side').innerHTML = menu.map(m => m.c
+    ? `<div class="grp ${m.c.some(x=>x[0]===cur)?'open':''}"><div class="mi" onclick="this.parentNode.classList.toggle('open')">${m.i}<span>${m.t}</span><b class="ar">▼</b></div>
+       <div class="sub">${m.c.map(x=>`<div class="mi ${x[0]===cur?'on':''}" onclick="go('${x[0]}')"><span>${x[1]}</span></div>`).join('')}</div></div>`
+    : `<div class="mi ${m.id===cur?'on':''}" onclick="go('${m.id}')">${m.i}<span>${m.t}</span></div>`).join('');
+}
+function renderTabs(){
+  document.getElementById('tabs').innerHTML = open.map(id =>
+    `<div class="tab ${id===cur?'on':''}" onclick="go('${id}')">${titleOf(id)}${id!=='home'?`<i onclick="event.stopPropagation();closeTab('${id}')">✕</i>`:''}</div>`).join('');
+}
+function go(id){ if(!open.includes(id)) open.push(id); cur=id; render(); }
+function closeTab(id){ open=open.filter(x=>x!==id); if(cur===id) cur=open[open.length-1]; render(); }
 
-                    <div class="card" style="margin-top: 20px;">
-                        <h3 style="margin-top: 0; color: #5D4B3D;">🚀 QILATES 气拉提 ERP 中台说明</h3>
-                        <p style="line-height: 1.6; font-size: 13px; color: #666;">
-                            欢迎使用气拉提品牌私有 ERP。左侧菜单已集成“SKU与辅料档案管理”、“全渠道订单状态机”、“双仓实时库存与 BOM 自动扣减”以及“三段成本双币种台账”。你可以直接点击左侧菜单体验所有新增、编辑、删除及批量导入功能。
-                        </p>
-                    </div>
-                </div>
-
-                <!-- 模块 1：SKU 与辅料档案管理 (新增!) -->
-                <div id="panel-sku-management" class="content-panel" style="display:none;">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
-                        <div>
-                            <h2 style="margin:0; font-family:serif; color:#5D4B3D;">SKU 与辅料档案统一管理</h2>
-                            <p style="margin:4px 0 0 0; font-size:12px; color:#666;">集中管理成品与 BOM 包装辅料，支持新建、编辑、删除及批量导入</p>
-                        </div>
-                        <div style="display: flex; gap: 10px;">
-                            <button class="btn" style="background: #D1E2EA; color: #5D4B3D;" onclick="openBatchImportModal()">📥 批量导入 SKU</button>
-                            <button class="btn" onclick="openSkuModal('create')">+ 新增物料 / SKU</button>
-                        </div>
-                    </div>
-
-                    <div class="card" style="padding: 0; overflow: hidden;">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>SKU 编码</th>
-                                    <th>品名与规格</th>
-                                    <th>物料类型</th>
-                                    <th>采购价 (CNY)</th>
-                                    <th>双仓实时库存</th>
-                                    <th>BOM 辅料配置</th>
-                                    <th style="text-align: right;">操作管理</th>
-                                </tr>
-                            </thead>
-                            <tbody id="sku-table-body">
-                                <tr>
-                                    <td style="font-family: monospace; font-weight: bold;">QLT-MAT-001</td>
-                                    <td>
-                                        <div>指压垫 160×60</div>
-                                        <div style="font-size: 11px; color: #777;">Acupressure Mat</div>
-                                    </td>
-                                    <td><span style="background: #67674E; color: #fff; padding: 2px 8px; border-radius: 4px; font-size: 11px;">成品 SKU</span></td>
-                                    <td style="font-family: monospace;">¥ 86.00</td>
-                                    <td style="font-family: monospace;">国内: 450 | 海外: 134</td>
-                                    <td style="font-size: 11px; font-family: monospace; color: #555;">• Pkg-Box-01 × 1<br>• Pkg-Card-01 × 1</td>
-                                    <td style="text-align: right;">
-                                        <button class="btn" style="padding: 4px 8px; font-size: 11px; background: #67674E;" onclick="openSkuModal('edit', 'QLT-MAT-001')">编辑</button>
-                                        <button class="btn" style="padding: 4px 8px; font-size: 11px; background: #991b1b;" onclick="deleteSku('QLT-MAT-001')">删除</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="font-family: monospace; font-weight: bold;">Pkg-Box-01</td>
-                                    <td>
-                                        <div>品牌彩色外箱</div>
-                                        <div style="font-size: 11px; color: #777;">销售包材</div>
-                                    </td>
-                                    <td><span style="background: #D1E2EA; color: #5D4B3D; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: bold;">辅料包材</span></td>
-                                    <td style="font-family: monospace;">¥ 3.20</td>
-                                    <td style="font-family: monospace;">国内: 1,200 | 海外: 1,314</td>
-                                    <td style="font-size: 11px; color: #888;">独立包材 (无下级BOM)</td>
-                                    <td style="text-align: right;">
-                                        <button class="btn" style="padding: 4px 8px; font-size: 11px; background: #67674E;" onclick="openSkuModal('edit', 'Pkg-Box-01')">编辑</button>
-                                        <button class="btn" style="padding: 4px 8px; font-size: 11px; background: #991b1b;" onclick="deleteSku('Pkg-Box-01')">删除</button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <!-- 模块 2：全渠道订单与状态机 -->
-                <div id="panel-orders" class="content-panel" style="display:none;">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
-                        <div>
-                            <h2 style="margin:0; font-family:serif; color:#5D4B3D;">全渠道订单中心与状态机履约</h2>
-                            <p style="margin:4px 0 0 0; font-size:12px; color:#666;">支持手工建单、达人赠送单及 Shopify/小程序 Webhook 自动对接</p>
-                        </div>
-                        <button class="btn" onclick="openOrderModal()">+ 新建订单 / 达人赠送单</button>
-                    </div>
-
-                    <div class="card" style="padding: 0; overflow: hidden;">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>单号 / 渠道</th>
-                                    <th>类型</th>
-                                    <th>客户 / 达人 Handle</th>
-                                    <th>SKU 与数量</th>
-                                    <th>状态机进度</th>
-                                    <th style="text-align: right;">流转操作</th>
-                                </tr>
-                            </thead>
-                            <tbody id="orders-table-body">
-                                <tr>
-                                    <td>
-                                        <div style="font-weight: bold; font-family: monospace;">SO-20261117-0001</div>
-                                        <div style="font-size: 11px; color: #777;">独立站 Shopify</div>
-                                    </td>
-                                    <td><span style="background: #67674E; color: #fff; padding: 2px 8px; border-radius: 4px; font-size: 11px;">正常销售</span></td>
-                                    <td>Elena Vance (US-CA)</td>
-                                    <td style="font-family: monospace;">QLT-MAT-001 × 2</td>
-                                    <td><span style="background: #dbeafe; color: #1e40af; padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 500;">已出库</span></td>
-                                    <td style="text-align: right;"><button class="btn" style="padding: 4px 10px; font-size: 12px;" onclick="advanceStatus(this)">签收归档</button></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <!-- 模块 3：双仓库存与 BOM -->
-                <div id="panel-inventory" class="content-panel" style="display:none;">
-                    <div style="margin-bottom: 16px;">
-                        <h2 style="margin:0; font-family:serif; color:#5D4B3D;">SKU 双仓库存与 BOM 级联扣减</h2>
-                        <p style="margin:4px 0 0 0; font-size:12px; color:#666;">国内仓与美西海外仓独立核算，成品出库自动联动扣减外箱与感谢卡包材[cite: 2]</p>
-                    </div>
-
-                    <div class="card" style="padding: 0; overflow: hidden;">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>SKU 编码 / 品名</th>
-                                    <th>物料类型</th>
-                                    <th>采购价 (CNY)</th>
-                                    <th>国内仓库存</th>
-                                    <th>美西海外仓</th>
-                                    <th>BOM 关联辅料</th>
-                                    <th style="text-align: right;">快捷入库</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <div style="font-weight: bold; font-family: monospace;">QLT-MAT-001</div>
-                                        <div style="font-size: 11px; color: #777;">指压垫 160×60</div>
-                                    </td>
-                                    <td><span style="background: #67674E; color: #fff; padding: 2px 8px; border-radius: 4px; font-size: 11px;">成品 SKU</span></td>
-                                    <td style="font-family: monospace;">¥ 86.00</td>
-                                    <td style="font-family: monospace; font-weight: bold;">450 套</td>
-                                    <td style="font-family: monospace; font-weight: bold; color: #67674E;" id="cell-us-stock">134 套</td>
-                                    <td style="font-size: 11px; font-family: monospace; color: #555;">• Pkg-Box-01 × 1<br>• Pkg-Card-01 × 1</td>
-                                    <td style="text-align: right;"><button class="btn" style="padding: 4px 10px; font-size: 12px;" onclick="addStock(50)">+50 入库</button></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <!-- 模块 4：财务台账 -->
-                <div id="panel-finance" class="content-panel" style="display:none;">
-                    <div style="margin-bottom: 16px;">
-                        <h2 style="margin:0; font-family:serif; color:#5D4B3D;">三段成本模型与双币种台账</h2>
-                        <p style="margin:4px 0 0 0; font-size:12px; color:#666;">精确归集工厂货款、BOM辅料与头尾程物流运费，支持汇率折算与结转[cite: 2]</p>
-                    </div>
-
-                    <div class="card-grid">
-                        <div class="card">
-                            <div style="font-size: 12px; color: #777; font-weight: bold;">本月总营业收入</div>
-                            <div style="font-size: 24px; font-weight: bold; margin-top: 8px; color: #67674E; font-family: monospace;">$ 9,840.00</div>
-                            <div style="font-size: 11px; color: #888; margin-top: 4px;">折合 ¥ 70,356.00 (汇率 7.15)</div>
-                        </div>
-                        <div class="card">
-                            <div style="font-size: 12px; color: #777; font-weight: bold;">三段总成本归集</div>
-                            <div style="font-size: 24px; font-weight: bold; margin-top: 8px; color: #5D4B3D; font-family: monospace;">¥ 26,420.00</div>
-                            <div style="font-size: 11px; color: #888; margin-top: 4px;">含货品、包材、头程及尾程</div>
-                        </div>
-                        <div class="card">
-                            <div style="font-size: 12px; color: #777; font-weight: bold;">毛利润 (Gross Profit)</div>
-                            <div style="font-size: 24px; font-weight: bold; margin-top: 8px; color: #67674E; font-family: monospace;">¥ 43,936.00</div>
-                            <div style="font-size: 11px; color: #888; margin-top: 4px; font-weight: bold; color: #166534;">综合毛利率 62.4%</div>
-                        </div>
-                        <div class="card">
-                            <div style="font-size: 12px; color: #777; font-weight: bold;">海外仓月度仓储费</div>
-                            <div style="font-size: 24px; font-weight: bold; margin-top: 8px; color: #5D4B3D; font-family: monospace;">$ 185.00</div>
-                            <div style="font-size: 11px; color: #888; margin-top: 4px;">按月度账单自动回写分摊</div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-
-    <!-- 弹窗 1：新增/编辑 SKU -->
-    <div class="modal-overlay" id="sku-modal">
-        <div class="modal" style="width: 520px;">
-            <h3 id="sku-modal-title" style="margin-top:0; font-family:serif; color:#5D4B3D;">📦 新增产品 / 辅料 SKU</h3>
-            <input type="hidden" id="sku-edit-mode" value="create">
-            <div class="form-group">
-                <label>SKU 唯一编码 (全局主键)</label>
-                <input type="text" id="form-sku-code" placeholder="例如: QLT-MAT-002 或 Pkg-Card-02">
-            </div>
-            <div class="form-group">
-                <label>品名与规格说明</label>
-                <input type="text" id="form-sku-name" placeholder="例如: 有机棉麻定制收纳袋">
-            </div>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
-                <div class="form-group">
-                    <label>物料类型分类</label>
-                    <select id="form-sku-category">
-                        <option value="FINISHED">核心成品 (FINISHED)</option>
-                        <option value="ACCESSORY">包装辅料/包材 (ACCESSORY)</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>工厂采购价 (CNY)</label>
-                    <input type="number" step="0.01" id="form-sku-price" value="10.00">
-                </div>
-            </div>
-            <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px;">
-                <button class="btn" style="background: #ccc; color: #333;" onclick="closeSkuModal()">取消</button>
-                <button class="btn" onclick="saveSkuData()">确认保存物料档案</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- 弹窗 2：批量导入 SKU -->
-    <div class="modal-overlay" id="import-sku-modal">
-        <div class="modal" style="width: 600px;">
-            <h3 style="margin-top:0; font-family:serif; color:#5D4B3D;">📦 批量导入产品 SKU</h3>
-            <div class="form-group">
-                <label>粘贴表格数据 (格式: SKU编码,品名,类型,采购价)</label>
-                <textarea id="import-csv-text" rows="6" placeholder="QLT-MAT-002,气拉提旅行便携垫,FINISHED,75.00
-Pkg-Box-02,旅行款彩色外箱,ACCESSORY,2.80"></textarea>
-            </div>
-            <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px;">
-                <button class="btn" style="background: #ccc; color: #333;" onclick="closeBatchImportModal()">取消</button>
-                <button class="btn" onclick="executeBatchImport()">确认批量导入</button>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        function switchTab(tabId, title) {
-            ['dashboard', 'sku-management', 'orders', 'inventory', 'finance'].forEach(id => {
-                document.getElementById('panel-' + id).style.display = id === tabId ? 'block' : 'none';
-                document.getElementById('menu-' + id).classList.remove('active');
-            });
-            document.getElementById('menu-' + tabId).classList.add('active');
-            document.getElementById('tabs-bar').innerHTML = `<div class="tab-chip active">${title}</div>`;
-        }
-
-        function openSkuModal(mode, skuCode = '') {
-            document.getElementById('sku-modal').style.display = 'flex';
-            document.getElementById('sku-edit-mode').value = mode;
-            if (mode === 'edit') {
-                document.getElementById('sku-modal-title').innerText = '✏️ 编辑物料: ' + skuCode;
-                document.getElementById('form-sku-code').value = skuCode;
-                document.getElementById('form-sku-code').disabled = true;
-            } else {
-                document.getElementById('sku-modal-title').innerText = '📦 新增产品 / 辅料 SKU';
-                document.getElementById('form-sku-code').value = '';
-                document.getElementById('form-sku-code').disabled = false;
-            }
-        }
-        function closeSkuModal() { document.getElementById('sku-modal').style.display = 'none'; }
-        function saveSkuData() {
-            alert('物料档案保存成功！');
-            closeSkuModal();
-        }
-        function deleteSku(code) {
-            if(confirm(`确定删除物料 ${code} 吗？`)) alert('已成功删除！');
-        }
-
-        function openBatchImportModal() { document.getElementById('import-sku-modal').style.display = 'flex'; }
-        function closeBatchImportModal() { document.getElementById('import-sku-modal').style.display = 'none'; }
-        function executeBatchImport() {
-            alert('批量导入成功！');
-            closeBatchImportModal();
-        }
-
-        function addStock(amount) {
-            const stockCell = document.getElementById('cell-us-stock');
-            const currentStock = parseInt(stockCell.innerText);
-            stockCell.innerText = (currentStock + amount) + ' 套';
-            alert(`成功入库 +${amount} 件！`);
-        }
-    </script>
+/* ===== 首页 ===== */
+const cards = [
+  ['待处理',[['待审核订单',0]]],
+  ['入库',[['采购待收货',0],['头程在途',0]]],
+  ['出库',[['销售出库',0],['达人赠送',0],['补发 / 客诉',0]]],
+  ['领星同步',[['库存拉取异常',0],['下行失败',0]]],
+  ['低库存预警',[['SKU 数',0]]]
+];
+const ranges = {
+  week:{l:['11-16','11-17','11-18','11-19','11-20','11-21','11-22'],a:[0,0,0,0,0,0,0],b:[1,0,0,0,0,0,0],c:[0,0,0,0,0,0,0]},
+  month:{l:Array.from({length:30},(_,i)=>i+1),a:Array(30).fill(0),b:Array.from({length:30},(_,i)=>i<18?(i%5===0?1:0):0),c:Array(30).fill(0)},
+  year:{l:['1','2','3','4','5','6','7','8','9','10','11','12'],a:[0,0,0,0,0,0,0,2,3,2,1,0],b:[0,0,0,0,0,0,0,5,12,18,9,1],c:[0,0,0,0,0,0,0,0,1,2,0,0]}
+};
+let rg = 'week';
+function chart(){
+  const d = ranges[rg], W=1000,H=260,L=40,B=30,max=Math.max(1,...d.a,...d.b,...d.c);
+  const x=i=>L+(W-L-10)*i/(d.l.length-1), y=v=>H-B-(H-B-10)*v/max;
+  const line=(s,col)=>`<polyline fill="none" stroke="${col}" stroke-width="2" points="${s.map((v,i)=>x(i)+','+y(v)).join(' ')}"/>`;
+  let g=''; for(let k=0;k<=5;k++){const v=max*k/5,yy=y(v);g+=`<line x1="${L}" x2="${W}" y1="${yy}" y2="${yy}" stroke="#e5e7eb" stroke-dasharray="4"/><text x="${L-8}" y="${yy+4}" text-anchor="end" font-size="12" fill="#6b7280">${+v.toFixed(1)}</text>`;}
+  const step=Math.ceil(d.l.length/10);
+  g+=d.l.map((t,i)=>i%step?'':`<text x="${x(i)}" y="${H-8}" text-anchor="middle" font-size="12" fill="#6b7280">${t}</text>`).join('');
+  return `<svg viewBox="0 0 ${W} ${H}" style="width:100%;height:auto">${g}${line(d.a,'#2d5bff')}${line(d.b,'#9333ea')}${line(d.c,'#16a34a')}</svg>`;
+}
+function setRange(r){ rg=r; renderHome(); }
+function renderHome(){
+  const d=ranges[rg], sum=a=>a.reduce((p,c)=>p+c,0);
+  document.getElementById('view').innerHTML =
+    `<div class="row">${cards.map(c=>`<div class="card"><h4>${c[0]}</h4><div class="cg">${c[1].map(s=>`<div><small>${s[0]}</small><strong>${s[1]}</strong></div>`).join('')}</div></div>`).join('')}</div>
+     <div class="panel"><div class="ph"><h3>单量分析</h3>
+       <div class="seg">${[['week','本周'],['month','本月'],['year','本年']].map(r=>`<button class="${rg===r[0]?'on':''}" onclick="setRange('${r[0]}')">${r[1]}</button>`).join('')}</div></div>
+       <div class="stats">
+         <div class="st" style="border-color:#2d5bff"><small>入库单量</small><div>${sum(d.a)}</div></div>
+         <div class="st" style="border-color:#9333ea"><small>销售出库单量</small><div>${sum(d.b)}</div></div>
+         <div class="st" style="border-color:#16a34a"><small>达人赠送单量</small><div>${sum(d.c)}</div></div>
+       </div>${chart()}</div>
+     <div class="panel"><div class="ph"><h3>核心定位</h3></div>
+       ${note('自研 ERP = 业务中台 + 成本台账（订单 / 库存 / 成本三套账的单一事实源）；领星 = 物流商 + 海外仓 WMS 执行层，通过双向 API 对接。营销推广费不进本系统。')}
+       ${flow(['渠道：小程序 / 独立站 / 平台 / 达人单','自研 ERP：订单·库存·成本·报表','领星 ERP：海外仓 WMS + 物流'])}</div>`;
+}
+function render(){
+  renderSide(); renderTabs();
+  document.getElementById('upd').textContent = '更新至时间 ' + new Date().toLocaleString('zh-CN',{hour12:false}) + ' UTC+8';
+  cur==='home' ? renderHome() : document.getElementById('view').innerHTML = pages[cur].html();
+}
+render();
+</script>
 </body>
 </html>
