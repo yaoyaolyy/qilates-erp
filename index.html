@@ -1,13 +1,110 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>QILATES - ERP 业务中台</title>
-    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-  </head>
-  <body class="bg-[#F3EEDF] text-[#5D4B3D] antialiased" style="font-family: 'Roboto', sans-serif;">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QILATES · 气拉提 ERP 业务中台</title>
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        body { margin: 0; background-color: #F3EEDF; color: #5D4B3D; font-family: -apple-system, BlinkMacSystemFont, sans-serif; }
+    </style>
+</head>
+<body>
     <div id="root"></div>
-    <script type="module" src="/App.jsx"></script>
-  </body>
+
+    <script type="text/babel">
+        function App() {
+          const [tab, setTab] = React.useState('home');
+
+          return (
+            <div style={{ minHeight: '100vh', padding: '24px', backgroundColor: '#F3EEDF' }}>
+              {/* 顶部标题栏 */}
+              <div style={{ backgroundColor: '#5D4B3D', color: '#F3EEDF', padding: '20px 24px', borderRadius: '12px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px', boxShadow: '0 4px 12px rgba(93,75,61,0.15)' }}>
+                <div>
+                  <h1 style={{ margin: 0, fontSize: '22px', letterSpacing: '0.5px' }}>QILATES · 气拉提 ERP 业务中台</h1>
+                  <p style={{ margin: '4px 0 0 0', fontSize: '13px', opacity: 0.8, color: '#D1E2EA' }}>多平台矩阵与美西海外仓/国内仓双账套管理</p>
+                </div>
+                <span style={{ fontSize: '12px', backgroundColor: '#67674E', padding: '6px 14px', borderRadius: '20px', color: '#D1E2EA', fontWeight: '500' }}>运行稳定 · 生产环境</span>
+              </div>
+
+              {/* 导航标签 */}
+              <div style={{ display: 'flex', gap: '12px', marginBottom: '24px' }}>
+                {[
+                  { id: 'home', label: '🏠 总览看板' },
+                  { id: 'inventory', label: '📦 国内/海外双账套与BOM' },
+                  { id: 'orders', label: '🛒 统一订单与状态机' }
+                ].map((t) => (
+                  <button 
+                    key={t.id}
+                    onClick={() => setTab(t.id)}
+                    style={{ 
+                      padding: '10px 20px', 
+                      borderRadius: '8px', 
+                      border: 'none', 
+                      cursor: 'pointer', 
+                      fontWeight: '600',
+                      fontSize: '14px',
+                      backgroundColor: tab === t.id ? '#67674E' : '#FFFFFF',
+                      color: tab === t.id ? '#FFFFFF' : '#5D4B3D',
+                      boxShadow: '0 2px 6px rgba(0,0,0,0.04)',
+                      transition: 'all 0.2s'
+                    }}
+                  >
+                    {t.label}
+                  </button>
+                ))}
+              </div>
+
+              {/* 内容区：总览看板 */}
+              {tab === 'home' && (
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '16px' }}>
+                  <div style={{ backgroundColor: '#FFFFFF', padding: '24px', borderRadius: '12px', boxShadow: '0 2px 6px rgba(0,0,0,0.04)' }}>
+                    <div style={{ fontSize: '14px', color: '#67674E', fontWeight: '500' }}>待处理订单 (Shopify & 小程序)</div>
+                    <div style={{ fontSize: '36px', fontWeight: 'bold', marginTop: '12px', color: '#5D4B3D' }}>3</div>
+                    <div style={{ fontSize: '12px', color: '#888', marginTop: '8px' }}>状态机流转正常，自动扣减库存</div>
+                  </div>
+                  <div style={{ backgroundColor: '#FFFFFF', padding: '24px', borderRadius: '12px', boxShadow: '0 2px 6px rgba(0,0,0,0.04)' }}>
+                    <div style={{ fontSize: '14px', color: '#67674E', fontWeight: '500' }}>美西海外仓可用成品</div>
+                    <div style={{ fontSize: '36px', fontWeight: 'bold', marginTop: '12px', color: '#67674E' }}>134 <span style={{ fontSize: '16px', fontWeight: 'normal' }}>张</span></div>
+                    <div style={{ fontSize: '12px', color: '#888', marginTop: '8px' }}>指压垫 QLT-MAT-001 (含箱规绑定)</div>
+                  </div>
+                  <div style={{ backgroundColor: '#FFFFFF', padding: '24px', borderRadius: '12px', boxShadow: '0 2px 6px rgba(0,0,0,0.04)' }}>
+                    <div style={{ fontSize: '14px', color: '#67674E', fontWeight: '500' }}>本月达人赠送单履约</div>
+                    <div style={{ fontSize: '36px', fontWeight: 'bold', marginTop: '12px', color: '#5D4B3D' }}>42 <span style={{ fontSize: '16px', fontWeight: 'normal' }}>套</span></div>
+                    <div style={{ fontSize: '12px', color: '#888', marginTop: '8px' }}>TikTok / 小红书达人 seeding</div>
+                  </div>
+                </div>
+              )}
+
+              {/* 内容区：库存与BOM */}
+              {tab === 'inventory' && (
+                <div style={{ backgroundColor: '#FFFFFF', padding: '24px', borderRadius: '12px', boxShadow: '0 2px 6px rgba(0,0,0,0.04)' }}>
+                  <h2 style={{ marginTop: 0, color: '#5D4B3D' }}>双账套库存与 BOM 辅料自动扣减</h2>
+                  <p style={{ lineHeight: '1.6', color: '#666' }}>
+                    当前国内仓与美西海外仓独立核算。每当主商品（气拉提指压垫）出库时，BOM 引擎会自动联动扣减配套的<strong>外包装礼盒</strong>与<strong>英文说明感谢卡</strong>。
+                  </p>
+                  <div style={{ marginTop: '20px', padding: '16px', backgroundColor: '#F9F8F3', borderRadius: '8px', borderLeft: '4px solid #67674E' }}>
+                    <strong>系统提示：</strong>所有敏感操作（如手动调整库存、强制出库）均受品牌安全确认弹窗保护，杜绝误操作。
+                  </div>
+                </div>
+              )}
+
+              {/* 内容区：统一订单中心 */}
+              {tab === 'orders' && (
+                <div style={{ backgroundColor: '#FFFFFF', padding: '24px', borderRadius: '12px', boxShadow: '0 2px 6px rgba(0,0,0,0.04)' }}>
+                  <h2 style={{ marginTop: 0, color: '#5D4B3D' }}>统一订单中心与状态机</h2>
+                  <p style={{ lineHeight: '1.6', color: '#666' }}>
+                    收口 Shopify 独立站、国内微信小程序及海外社媒红人赠送订单。支持多平台状态机自动化同步，无缝对接海外仓发货指令。
+                  </p>
+                </div>
+              )}
+            </div>
+          );
+        }
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+    </script>
+</body>
 </html>
